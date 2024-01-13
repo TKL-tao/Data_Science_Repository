@@ -1,4 +1,4 @@
-# Data-Science-Repository
+# Data Science Repository
 This repository documents my learning journey in the field of Data Science.
 
 
