@@ -1,0 +1,1651 @@
+---
+title: "数学分析定理"
+date: "`r Sys.Date()`"
+author: "Tao Zou"
+output:
+  rmdformats::readthedown:
+    self_contained: true
+    thumbnails: true
+    lightbox: true
+    gallery: false
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+## Global options
+knitr::opts_chunk$set(cache = TRUE)
+```
+
+```{r include=FALSE}
+setwd("D:/python_work/python_workspace/MathematicalAnalysis/Theorem")
+```
+
+# 数列极限
+**<font color="red" size=5>唯一性</font>**：若$\{u_n\}$满足：
+
+(1) 收敛
+
+则收敛值唯一。
+
+**<font color="red" size=5>有界性</font>**：若$\{u_n\}$满足：
+
+(1) 收敛；
+
+则$\{u_n\}$有界。
+
+**<font color="red" size=5>保号性</font>**：若$\{u_n\}$满足：
+
+(1) $\lim_\limits{n\rightarrow\infty}u_n=A>0$；
+
+则$\forall\ r\in(0,A)$，$\exists\ N>0$，当$n>N$时有$u_n>r$。
+
+**<font color="#f47e76" size=4>推论</font>**：若$\{u_n\}$，$\{v_n\}$满足：
+
+(1) $\lim_\limits{n\rightarrow\infty}u_n=A<\lim_\limits{n\rightarrow\infty}v_n=B$；
+
+则$\exists\ N>0$，当$n>N$时，有$u_n<v_n$。
+
+**<font color="red" size=5>保不等式性</font>**：若$\{u_n\}$，$\{v_n\}$满足：
+
+(1) 收敛；
+
+(2) $u_n\leq v_n$；
+
+则$\lim_\limits{n\rightarrow\infty}u_n\leq\lim_\limits{n\rightarrow\infty}v_n$。
+
+**<font color="red" size=5>迫敛性</font>**：若$\{u_n\}$，$\{v_n\}$，$\{c_n\}$满足：
+
+(1) $\lim_\limits{n\rightarrow\infty}u_n=\lim_\limits{n\rightarrow\infty}v_n=A$，$A$为常数；
+
+(2) $\exists\ N>0$，当$n>N$时有$u_n\leq c_n\leq v_n$；
+
+则$\lim_\limits{n\rightarrow\infty}c_n=A$。
+
+**<font color="red" size=5>四则运算法则</font>**：若$\{u_n\}$与$\{v_n\}$满足：
+
+(1) 收敛；
+
+则$$\lim_\limits{n\rightarrow\infty}(u_n\pm v_n)=\lim_\limits{n\rightarrow\infty}u_n\pm\lim_\limits{n\rightarrow\infty}v_n$$
+$$\lim_\limits{n\rightarrow\infty}u_nv_n=\lim_\limits{n\rightarrow\infty}u_n\cdot \lim_\limits{n\rightarrow\infty}v_n$$
+
+(2) $v_n\neq0$，$\lim_\limits{n\rightarrow\infty}v_n\neq0$；
+
+则$$\lim_\limits{n\rightarrow\infty}\frac{u_n}{v_n}=\frac{\lim_\limits{n\rightarrow\infty}u_n}{\lim_\limits{n\rightarrow\infty}v_n}$$。
+
+**<font color="red" size=5>数列收敛的充要条件</font>**：
+
+$\{u_n\}$收敛。等价于$\Leftrightarrow$ $\{u_n\}$的任何子列都收敛。
+
+**<font color="red" size=5>Cauchy收敛准则</font>**：
+
+$\{u_n\}$收敛。等价于$\Leftrightarrow$ $\forall\ \varepsilon>0$，$\exists\ N>0$，当$n,m>N$时有$$|u_n-u_m|<\varepsilon$$。
+
+**<font color="red" size=5>单调有界定理</font>**：若$\{u_n\}$满足：
+
+(1) 单调有界；
+
+则$\lim_\limits{n\rightarrow\infty}u_n$存在。
+
+**<font color="red" size=5>单调子列定理</font>**：若$\{u_n\}$满足：
+
+则存在单调子列$\{u_{n_k}\}$。
+
+**<font color="red" size=5>致密性定理</font>**：若$\{u_n\}$满足：
+
+(1) 有界；
+
+则存在收敛子列$\{u_{n_k}\}$。
+
+# 函数极限
+## 函数极限的性质
+**<font color="red" size=5>唯一性</font>**：若$f$满足：
+
+(1) $\lim_\limits{x\rightarrow x_0}f(x)$存在；
+
+则此极限唯一。
+
+**<font color="red" size=5>局部有界性</font>**：若$f$满足：
+
+(1) $\lim_\limits{x\rightarrow x_0}f(x)$存在；
+
+则$f$在某$\mathop{U}^\limits{0}(x_0)$有界。
+
+**<font color="red" size=5>局部保号性</font>**：若$f$满足：
+
+(1) $\lim_\limits{x\rightarrow x_0}f(x)=A>0\ (<0)$；
+
+则$\forall\ r\in (0,A)\ (\ (A,0)\ )$，$\exists\ \delta>0$，$\forall x\in \mathop{U}^\limits{0}(x_0,\delta)$时，有$$f(x)>r>0\ (f(x)<r<0)$$。
+
+**<font color="red" size=5>保不等式性</font>**：若$f$、$g$满足：
+
+(1) $\lim_\limits{x\rightarrow x_0} f(x)$与$\lim_\limits{x\rightarrow x_0} g(x)$都存在；
+
+(2) 在某$\mathop{U}^\limits{0}(x_0)$上，有$f(x)\leq g(x)$；
+
+则$$\lim_\limits{x\rightarrow x_0}f(x)\leq \lim_\limits{x\rightarrow x_0}g(x)$$。
+
+**<font color="red" size=5>迫敛性</font>**：若$f$、$g$满足：
+
+(1) $\lim_\limits{x\rightarrow x_0} f(x)=\lim_\limits{x\rightarrow x_0} g(x)=A$；
+
+(2) 在某$\mathop{U}^\limits{0}(x_0)$上，有$f(x)\leq h(x)\leq g(x)$；
+
+则$$\lim_\limits{x\rightarrow x_0} h(x)=A$$。
+
+**<font color="red" size=5>四则运算法则</font>**：若$f$、$g$满足：
+
+(1) $\lim_\limits{x\rightarrow x_0} f(x)$与$\lim_\limits{x\rightarrow x_0} g(x)$都存在；
+
+则$$\lim_\limits{x\rightarrow x_0}[f(x)\pm g(x)]=\lim_\limits{x\rightarrow x_0}f(x)\pm\lim_\limits{x\rightarrow x_0}g(x)$$；$$\lim_\limits{x\rightarrow x_0}[f(x)g(x)]=\lim_\limits{x\rightarrow x_0}f(x)\cdot\lim_\limits{x\rightarrow x_0}g(x)$$；
+
+(2) $g(x)\neq0$，$\lim_\limits{x\rightarrow x_0} g(x)\neq0$；
+
+则$$\lim_\limits{x\rightarrow x_0}\frac{f(x)}{g(x)}=\frac{\lim_\limits{x\rightarrow x_0}f(x)}{\lim_\limits{x\rightarrow x_0}g(x)}$$。
+
+## 函数极限存在条件
+**<font color="red" size=5>Heine定理（归结原则）</font>**：
+
+$f(x)$在$\mathop{U}^\limits{0}(x_0;\delta')$上有定义，$\lim_\limits{x\rightarrow x_0}f(x)=A$（$A$为常数）。等价于$\Leftrightarrow$ 对于任何$\{x_n\}\subset\mathop{U}^\limits{0}(x_0;\delta')$，且$\lim_\limits{n\rightarrow \infty}x_n=x_0$，$\lim_\limits{n\rightarrow \infty}f(x_n)=A$。
+
+**<font color="#f47e76" size=4>推论</font>**：
+
+$f(x)$在${\mathop{U}^\limits{0}}_+(x_0;\delta')$上有定义，$\lim_\limits{x\rightarrow x_0^+}f(x)=A$（$A$为常数）。等价于$\Leftrightarrow$ 对于任何递减数列$\{x_n\}\subset{\mathop{U}^\limits{0}}_+(x_0;\delta')$，且$\lim_\limits{n\rightarrow \infty}x_n=x_0$，$\lim_\limits{n\rightarrow \infty}f(x_n)=A$
+
+**<font color="red" size=5>定理</font>**：若$f$满足：
+
+(1) 在${\mathop{U}^\limits{0}}_+(x_0)$上单调；
+
+(2) 在${\mathop{U}^\limits{0}}_+(x_0)$上有界；
+
+则$\lim_\limits{x\rightarrow x_0^+}f(x)$存在。
+
+**<font color="#f47e76" size=4>推论</font>**：若$f$满足：
+
+(1) 在${\mathop{U}^\limits{0}}_+(x_0)$上单调递增（单调递减）；
+
+(2) 在${\mathop{U}^\limits{0}}_+(x_0)$上有下界（有上界）；
+
+则$\lim_\limits{x\rightarrow x_0^+}f(x)$存在。
+
+**<font color="red" size=5>Cauchy收敛准则</font>**：
+
+$f(x)$在$\mathop{U}^\limits{0}(x_0;\delta')$上有定义，$\lim_\limits{x\rightarrow x_0}f(x)$存在。等价于$\Leftrightarrow$ $\forall\ \varepsilon>0$，$\exists\ \delta>0\ (\delta<\delta')$，使得$\forall\ x',x''\in\mathop{U}^\limits{0}(x_0;\delta)$，有$|f(x')-f(x'')|<\varepsilon$。
+
+# 函数连续性
+## 连续函数的性质
+**<font color="red" size=5>局部有界性</font>**：若$f$满足：
+
+(1) 在$x_0$连续；
+
+则$f$在$\mathop{U}(x_0)$上有界。
+
+**<font color="red" size=5>局部保号性</font>**：若$f$满足：
+
+(1) 在$x_0$连续；
+
+(2) $f(x_0)>0\ (<0)$；
+
+则$\forall\ r\in(0,f(x_0))\ (\ (f(x_0),0)\ )$，$\exists\ \delta>0$，$\forall\ x\in\mathop{U}(x_0,\delta)$时，有$$f(x)>r>0\ (f(x)<r<0)$$。
+
+**<font color="red" size=5>四则运算法则</font>**：若$f$、$g$满足：
+
+(1) 都在$x_0$处连续；
+
+则$f\pm g$、$f\cdot g$也在$x_0$处连续；
+
+(2) $g(x_0)\neq0$；
+
+则$\frac{f(x_0)}{g(x_0)}$也在$x_0$处连续。
+
+**<font color="red" size=5>复合函数的连续性</font>**：若$f$、$g$满足：
+
+(1) $f$在$u=u_0$处连续；
+
+(2) $g$在$x=x_0$处连续；
+
+(3) $f\circ g$在$U(x_0)$上存在，且$u_0=g(x_0)$；
+
+则$f\circ g$在$x_0$上连续。
+
+**<font color="red" size=5>闭区间上最值定理</font>**：若$f$满足：
+
+(1) 在$[a,b]$上连续；
+
+则$f$在$[a,b]$上存在最大值和最小值。
+
+**<font color="red" size=5>介值定理</font>**：若$f$满足：
+
+(1) 在$[a,b]$上连续；
+
+(2) $f(a)\neq f(b)$；
+
+则$\forall \mu\in(f(a),f(b))$或$(f(b),f(a))$，$\exists\ \xi\in(a,b)$使得$$f(\xi)=\mu$$。
+
+**<font color="#f47e76" size=4>推论</font>**：若$f$满足：
+
+(1) 在$[a,b]$上连续；
+
+(2) $f(a)f(b)<0$；
+
+则$\exists\ \xi\in(a,b)$，使得$$f(\xi)=0$$。
+
+**<font color="red" size=5>反函数连续性定理</font>**：若$f$满足：
+
+(1) 在$[a,b]$上严格单调；
+
+(2) 在$[a,b]$上连续；
+
+则$f^{-1}$在$[f(a),f(b)]$或$[f(b),f(a)]$上连续。
+
+**<font color="red" size=5>闭区间一致连续性定理</font>**：若$f$满足：
+
+(1) 在$[a,b]$上连续；
+
+则$f$在$[a,b]$上一致连续。
+
+**<font color="red" size=5>一致连续性充要条件</font>**：
+
+$f$在$I$上一致连续。等价于$\Leftrightarrow$ $\forall\ \{x'_n\},\{x''_n\}\subset I$，且$\lim_\limits{n\rightarrow\infty}x_n'-x_n''=0$，则$$\lim_\limits{n\rightarrow\infty}\big{[}f(x'_n)-f(x''_n)\big{]}=0$$。
+
+# 导数与微分
+## 导数
+**<font color="red" size=5>反函数的导数</font>**：$x=\varphi(y)$是$y=f(x)$的反函数，若$x=\varphi(y)$满足：
+
+(1) 严格单调；
+
+(2) $\varphi'(y)\neq0$；
+
+则$y=f(x)$可导，且$$f'(x)=\frac{1}{\varphi'(y)}$$。
+
+**<font color="red" size=5>参变量函数的导数</font>**：若$\begin{cases}y=\psi(t)\\x=\varphi(t)\end{cases}\alpha\leq t\leq\beta$满足：
+
+(1) $x=\varphi(t)$具有反函数；
+
+(2) $\varphi$与$\psi$可导，且$\varphi'(t)\neq0$；
+
+则$$\frac{dy}{dx}=\frac{\psi'(t)}{\varphi'(t)}$$。
+
+
+
+
+# 微分中值定理
+## 基础中值定理
+**<font color="red" size=5>Rolle中值定理</font>**：若函数$f$满足：
+
+(1) 在$[a,b]$上连续；
+
+(2) 在$(a,b)$上可导；
+
+(3) $f(a)=f(b)$；
+
+则$\exists\ \xi\in (a,b)$，使$$f'(\xi)=0$$。
+
+**<font color="red" size=5>Lagrange中值定理</font>**：若函数$f$满足：
+
+(1) 在$[a,b]$上连续；
+
+(2) 在$(a,b)$上可导；
+
+则$\exists\ \xi\in (a,b)$，使$$f'(\xi)=\frac{f(b)-f(a)}{b-a}$$。
+
+**<font color="red" size=5>Taylor定理</font>**：若函数$f^{(n)}$满足：
+
+(1) 在$[a,b]$上连续；
+
+(2) 在$(a,b)$上可导；
+
+则$\forall\ x,x_0 \in [a,b]$，$\exists\ \xi\in (a,b)$（实际上是$\exists\ \xi\in (x,x_0)或(x_0,x)$）使$$f(x)-f(x_0)=\frac{f^{(1)}(x_0)}{1!}(x-x_0)^1+...+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}$$。
+
+**<font color="red" size=5>Cauchy中值定理</font>**：若函数$f$与$g$满足：
+
+(1) 都在$[a,b]$上连续；
+
+(2) 都在$(a,b)$上可导；
+
+(3) $\forall\ x\in(a,b),\ g'(x)\neq0$且$g(b)-g(a)\neq0$；
+
+则$\exists\ \xi\in (a,b)$，使$$\frac{f'(\xi)}{g'(\xi)}=\frac{f(b)-f(a)}{g(b)-g(a)}$$。
+
+**<font color="red" size=5>导数极限定理</font>**：若$f$满足：
+
+(1) 在$U(x_0)$上连续；
+
+(2) 在$\mathop{U}^\limits{0}(x_0)$上可导；
+
+(3) $\lim_\limits{x\rightarrow x_0}f'(x)$存在；
+
+则$f'(x_0)$存在，且$$f'(x_0)=\lim_\limits{x\rightarrow x_0}f'(x)$$。
+
+<font color="blue">注：导数极限定理常用与求分段函数的极限。</font>
+
+**<font color="red" size=5>导函数介值定理（Darboux定理）</font>**：若$f$满足：
+
+(1) 在$[a,b]$上可导；
+
+(2) $f'_+(a)\neq f'_-(b)$；（设$f'_+(a)<f'_-(b)$）
+
+则$$\Big{(}f'_+(a),f'_-(b)\Big{)}\subset f'\Big{(}(a,b)\Big{)}$$。
+
+**<font color="#f47e76" size=4>推论</font>**：若$f$满足;
+
+(1) $\forall\ x\in I$，$f'(x)$存在且$f'(x)\neq0$；
+
+则$f$在$I$上严格单调。
+
+## L'Hospital法则
+**<font color="red" size=5>$\frac{0}{0}$不定式极限</font>**：若函数$f$与$g$满足：
+
+(1) $\lim_\limits{x→x_0}f(x)=\lim_\limits{x→x_0}g(x)$=0；
+
+(2) $f$与$g$在某$\mathop{U}^\limits{0}(x_0)$可导，且$g'(x)≠0$;
+
+(3) $\lim_\limits{x→x_0}\frac{f'(x)}{g'(x)}=A$（$A$为实数，也可为$±\infty$）
+
+<font color="blue">注：上述三个条件均不关心$f(x_0)$与$g(x_0)$</font>
+
+则$$\lim_\limits{x→x_0}\frac{f'(x)}{g'(x)}=\lim_\limits{x→x_0}\frac{f(x)}{g(x)}$$。
+
+对于$x→x_0^+$、$x→x_0^-$、$x→\infty$、$x→±\infty$也有同样的结论。
+
+**<font color="red" size=5>$\frac{·}{\infty}$不定式极限</font>**：若函数$f$与$g$满足：
+
+(1) $\lim_\limits{x→x_0^+}g(x)=\infty$；
+
+(2) $f$与$g$在某${\mathop{U}^\limits{0}}_+(x_0)$可导，且$g'(x)≠0$;
+
+(3) $\lim_\limits{x→x_0}\frac{f'(x)}{g'(x)}=A$（$A$为实数，也可为$±\infty$）
+
+则$$\lim_\limits{x→x_0}\frac{f'(x)}{g'(x)}=\lim_\limits{x→x_0}\frac{f(x)}{g(x)}$$。
+
+对于$x→x_0$、$x→x_0^-$、$x→\infty$、$x→±\infty$也有同样的结论。
+
+**<font color="red" size=5>Taylor多项式定理</font>**：若$f$在$x_0$存在n阶导数，则存在唯一的$n$次多项式$p_n(x)$使得$$f(x)=p_n(x)+o((x-x_0)^n)$$，即$$f(x)-f(x_0)=\frac{f^{(1)}(x_0)}{1!}(x-x_0)^1+...+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+o((x-x_0)^n)$$。
+
+## 一元函数极值定理
+**<font color="red" size=5>极值第一充分条件</font>**：若$f$满足：
+
+(1) 在$x_0$连续；
+
+(2) 在某$\mathop{U}^\limits{0}(x_0;\delta)\ (\delta>0)$上可导；
+
+则，若当$x\in (x_0-\delta,x_0)$时，$f'(x)≥0$；当$x\in (x_0,x_0+\delta)$时，$f'(x)≤0$，则$f$在$x_0$取得极大值；
+
+若当$x\in (x_0-\delta,x_0)$时，$f'(x)≤0$；当$x\in (x_0,x_0+\delta)$时，$f'(x)≥0$，则$f$在$x_0$取得极小值。
+
+**<font color="red" size=5>极值第二充分条件</font>**：若$f$满足：
+
+(1) $f$在$x_0$处二阶可导；
+
+(2) $f'(x_0)=0$，$f''(x_0)≠0$；
+
+则若$f'(x_0)>0$，则$f$在$x_0$处取得极小值；
+
+若$f'(x_0)<0$，则$f$在$x_0$处取得极大值。
+
+**<font color="red" size=5>极值第三充分条件</font>**：若$f$满足：
+
+(1) $f$在$x_0$处$n$阶可导$(n\geq2)$；
+
+(2) $\forall\ k=1,2,...,n-1$都有$f^{(k)}(x_0)=0$，$f^{(n)}(x_0)≠0$；
+
+则若$n$为奇数，则$f$在$x_0$处不取极值；
+
+若$n$为偶数，$f^{(n)}(x_0)>0$则$f$在$x_0$取得极小值；$f^{(n)}(x_0)<0$则$f$在$x_0$取得极大值。
+
+## 凹凸函数与拐点
+**<font color="red" size=5>凸函数判定定理一</font>**：若$f$满足：
+
+(1) 在$I$上可导；
+
+则以下三个命题等价：
+
+**命题1**：$f$在$I$上为凸函数。
+
+**命题2**：$f'$在$I$上为增函数。
+
+**命题3**：$\forall\ x_1,x_2\in I,\ x_1<x_2$，有$$f'(x_1)\leq\frac{f(x_2)-f(x_1)}{x_2-x_1}$$。
+
+**<font color="red" size=5>凸函数判定定理二</font>**：若$f$满足：
+
+(1) 在$I$上二阶可导；
+
+则$f$在$I$上为凸函数（凹函数）等价于$\Leftrightarrow$ $$f''(x)\geq0\ \ \ (f''(x)\leq0)$$。
+
+**<font color="red" size=5>可导凸函数的性质</font>**：若$f$满足：
+
+(1) 在$I$上为可导凸函数（凹函数）；
+
+则$x_0\in(a,b)$为$f$的极小值（极大值）点 等价于$\Leftrightarrow$ $$f'(x_0)=0$$。
+
+**<font color="red" size=5>二阶可导函数拐点必要条件</font>**：若$f$满足：
+
+(1) 在$x_0$处二阶可导；
+
+(2) $\big{(}x_0,f(x_0)\big{)}$为其拐点；
+
+则$f''(x_0)=0$。
+
+**<font color="red" size=5>二阶可导函数拐点充分条件</font>**：若$f$满足：
+
+(1) 在$x_0$处可导；
+
+(2) 在$\mathop{U}^\limits{0}(x_0)$上二阶可导，且$f''(x)$在$x_0$两侧异号；
+
+则$\big{(}x_0,f(x_0)\big{)}$为其$f$拐点。
+
+# 不定积分
+**<font color="red" size=5>原函数存在定理</font>**：若$f$满足：
+
+(1) $f$在区间$I$上连续；
+
+则$f$在$I$上存在原函数$f$。
+
+**<font color="red" size=5>三角代换</font>**：
+
+令$\tan \frac{x}{2}=u$，则$$\sin x=\frac{2u}{1+u^2}\ \ \cos x=\frac{1-u^2}{1+u^2}\ \ \ dx=\frac{2}{1+u^2}du$$。
+
+**<font color="red" size=5>根式代换</font>**：
+
+形如$$\int R(x,\sqrt[n]{\frac{ax+b}{cx+d}})dx$$，其中$ad-bc\neq0$，则可令$\sqrt[n]{\frac{ax+b}{cx+d}}=t$来将之转化为有理函数的不定积分。
+
+# 定积分
+**<font color="red" size=5>Newton-Leibniz公式</font>**：若$f$满足：
+
+(1) 在$[a,b]$上连续；
+
+则$f$在$[a,b]$上可积，且$$\int_a^bf(x)dx=F(b)-F(a)=F(x)\Big{|}_a^b$$，其中$F$为$f$在$[a,b]$上的原函数。
+
+## 积分的可积条件
+**<font color="red" size=5>可积必要条件</font>**：若$f$满足：
+
+(1) 在$[a,b]$上可积；
+
+则$f$在$[a,b]$上有界。
+
+**<font color="red" size=5>可积准则</font>**：$f$在$[a,b]$上可积等价于$\Leftrightarrow$
+
+$\forall\ \varepsilon>0$，$\exists\ \delta>0$，当$||T||<\delta$时，有$$\sum_{i=1}^nw_i\Delta x_i<\varepsilon$$，其中$w_i$是振幅，为分割段$\Delta_i$上$f$的上确界与下确界之差。
+
+$w_i$还可以表示为：$w_i=\mathop{sup}_\limits{x',x''\in \Delta_i}|f(x')-f(x'')|$（$\forall\ x',x''\in \Delta_i$）
+
+**<font color="red" size=5>第一可积函数类</font>**：若$f$满足：
+
+(1) 在$[a,b]$上连续；
+
+则$f$在$[a,b]$上可积。
+
+**<font color="red" size=5>第二可积函数类</font>**：若$f$满足：
+
+(1) 在$[a,b]$上有有限个间断点；
+
+(2) 在$[a,b]$上有界；
+
+则$f$在$[a,b]$上可积。
+
+**<font color="red" size=5>第三可积函数类</font>**：若$f$满足：
+
+(1) 在$[a,b]$上单调；（闭区间上的单调函数有界，因此不需要追加条件“在$[a,b]$上有界”）
+
+则$f$在$[a,b]$上可积。
+
+## 积分的性质
+**<font color="red" size=5>积分线性性质</font>**：若$f$、$g$满足：
+
+(1) 在$[a,b]$上可积；
+
+则对于任意常数$\alpha$、$\beta$有：$$\int_a^b[\alpha f(x)\pm\beta g(x)]dx=\alpha \int_a^bf(x)dx\pm\beta\int_a^bg(x)dx$$。
+
+**<font color="red" size=5>积分乘积性质</font>**：若$f$、$g$满足：
+
+(1) 在$[a,b]$上可积；
+
+则$f·g$在$[a,b]$上可积。
+
+**<font color="red" size=5>积分区间可加性质</font>**：$f$在$[a,b]$上可积等价于$\Leftrightarrow$
+
+$\forall\ c\in (a,b)$，$f$在$[a,c]$和$[c,b]$上都可积。此时有：$$\int_a^b f(x)dx=\int_a^cf(x)dx+\int_c^bf(x)dx$$。
+
+**<font color="red" size=5>积分不等式性</font>**：$f$满足：
+
+(1) 在$[a,b]$上可积；
+
+(2) $f(x)\geq0$，$x\in[a,b]$；
+
+则$\int_a^bf(x)dx\geq0$。
+
+**<font color="#f47e76" size=4>推论</font>**：若$f$、$g$满足：
+
+(1) 在$[a,b]$上可积；
+
+(2) $f(x)\leq g(x)$，$x\in[a,b]$；
+
+则$\int_a^bf(x)dx\leq\int_a^bg(x)dx$。
+
+**<font color="red" size=5>绝对值函数可积性</font>**：若$f$满足：
+
+(1) 在$[a,b]$上可积；
+
+则$|f|$在$[a,b]$上可积，且$$|\int_a^bf(x)dx|\leq\int_a^b|f(x)|dx$$。
+
+## 积分中值定理
+**<font color="red" size=5>积分第一中值定理</font>**：若$f$满足：
+
+(1) 在$[a,b]$上连续；
+
+则$\exists\ \xi\in(a,b)$，使得$$\int_a^bf(x)dx=f(\xi)(b-a)$$。
+
+**<font color="#f47e76" size=4>推论</font>**：若$f$、$g$满足：
+
+(1) 都在$[a,b]$上连续；
+
+(2) $g(x)$在$[a,b]$上不变号；
+
+则$\exists\ \xi\in(a,b)$，使得$$\int_a^bf(x)g(x)dx=f(\xi)\int_a^bg(x)dx$$。
+
+**<font color="red" size=5>积分第二中值定理</font>**：若$f$、$g$满足：
+
+(1) $f$在$[a,b]$上可积；
+
+(2) $g$在$[a,b]$上单调，且$g(x)\geq0$；
+
+则，若$g$单调递增，则$\exists\ \xi\in(a,b)$，使得$$\int_a^bf(x)g(x)dx=g(b)\int_\xi^bf(x)dx$$；若$g$单调递减，则$\exists\ \xi\in(a,b)$，使得$$\int_a^bf(x)g(x)dx=g(a)\int_a^\xi f(x)dx$$。
+
+**<font color="#f47e76" size=4>推论</font>**：若$f$、$g$满足：
+
+(1) $f$在$[a,b]$上可积；
+
+(2) $g$在$[a,b]$上单调；
+
+则$\exists\ \xi\in(a,b)$，使得$$\int_a^bf(x)g(x)dx=g(b)\int_\xi^bf(x)dx+g(a)\int_a^\xi f(x)dx$$。
+
+## 微积分学基本定理
+**<font color="red" size=5>定理</font>**：若$f$满足：
+
+(1) 在$[a,b]$上可积；
+
+则$f$的变上限定积分$$F(x)=\int_a^xf(t)dt$$在$[a,b]$上连续。
+
+**<font color="red" size=5>微积分学基本定理</font>**：若$f$满足：
+
+(1) 在$[a,b]$上连续；
+
+则$f$的变上限定积分$F(x)=\int_a^xf(t)dt$在$[a,b]$上可导，且$$F'(x)=\frac{d}{dx}\int_a^xf(t)dt=f(x),\ (x\in[a,b])$$。
+
+## 换元积分法和分部积分法
+**<font color="red" size=5>换元积分法</font>**：若$f$、$\varphi$满足：
+
+(1) $f$在$[a,b]$上连续；
+
+(2) $\varphi '$在$[\alpha,\beta]$上可积；
+
+(3) $\varphi(\alpha)=a(或b)$；$\varphi(\beta)=b(或a)$；$\varphi([\alpha,\beta])\subset [a,b]$；（“$\subset$”为包含于或等于的意思）
+
+则，$$\int_a^bf(x)dx=\int_\alpha^\beta f[\varphi(t)]\varphi'(t)dt$$。
+
+**<font color="red" size=5>分部积分法</font>**：若$u$、$v$满足：
+
+(1) 都在$[a,b]$上可导；
+
+(2) $u'$与$v'$都在$[a,b]$上可积；
+
+则，$$\int_a^bu(x)v'(x)dx=u(x)v(x)\Big{|}_a^b-\int_a^bu'(x)v(x)dx$$。
+
+# 定积分的应用
+此部分未特别说明的参数方程都指：
+$$
+\begin{cases}
+y=y(t)\\
+x=x(t)
+\end{cases}t\in[\alpha,\beta]
+$$
+
+**<font color="red" size=5>非封闭曲线所围面积计算定理</font>**：若参数方程满足：
+
+(1) $x(\alpha)\neq x(\beta)$；
+
+(2) $y(t)$在$[\alpha,\beta]$上连续；
+
+(3) $x(t)$在$[\alpha,\beta]$上连续可微，且$x'(t)\neq0$，$t\in(\alpha,\beta)$。
+
+则由曲线以及直线$x=x(\alpha)$，直线$x=x(\beta)$，$x$轴所围成的图形的面积为$$S=\int_\alpha^\beta|y(t)x'(t)|dt$$。
+
+**<font color="red" size=5>封闭曲线所围面积计算定理</font>**：若参数方程满足：
+
+(1) $x(\alpha)= x(\beta)$，$y(\alpha)=y(\beta)$，且无其他自交点；
+
+(2) $y(t)$在$[\alpha,\beta]$上连续；
+
+(3) $x(t)$在$[\alpha,\beta]$上连续可微，且$x'(t)\neq0$，$t\in(\alpha,\beta)$。
+
+则封闭曲线所围成的图形的面积为$$S=\Big{|}\int_\alpha^\beta y(t)x'(t)dt\Big{|}$$。
+
+**<font color="red" size=5>极坐标扫过扇形面积计算定理</font>**：若极坐标方程$r=r(\theta)$满足：
+
+(1) 在$[\alpha,\beta]$上连续；
+
+(2) $\beta-\alpha\leq2\pi$；
+
+则极坐标扫过的扇形的面积为$$S=\frac{1}{2}\int_\alpha^\beta r^2(\theta)d\theta$$。
+
+**<font color="red" size=5>平面曲线弧长计算定理</font>**：若参数方程满足：
+
+(1) 其对应的曲线是无自交点的非闭或闭曲线；
+
+(2) $y=y(t)$与$x=x(t)$在$[\alpha,\beta]$上连续可微；
+
+则弧长计算公式为$$s=\int_\alpha^\beta\sqrt{[y'(t)]^2+[x'(t)]^2}dt$$。
+
+**<font color="#f47e76" size=4>推论</font>**：若参数方程满足：
+
+(1) 其对应的曲线是一条光滑曲线，即$x(t)$与$y(t)$连续可微，且$\big{[}x'(t)\big{]}^2+\big{[}y'(t)\big{]}^2\neq0$；
+
+则弧长计算公式为$$s=\int_\alpha^\beta\sqrt{[y'(t)]^2+[x'(t)]^2}dt$$。
+
+**<font color="#f47e76" size=4>推论：光滑极坐标曲线弧长公式</font>**：若参数方程满足：
+
+(1) $r=r(\theta)\ \ \theta\in[\alpha,\beta]$是一条光滑曲线，即$r'(\theta)$在$[\alpha,\beta]$上连续，$[r(\theta)]^2+[r'(\theta)]^2\neq0$；
+
+则弧长计算公式为$$s=\int_\alpha^\beta\sqrt{[r(\theta)]^2+[r'(\theta)]^2}dt$$。
+
+**<font color="red" size=5>曲率</font>**：若参数方程满足：
+
+(1) 在某点处有$\big{|}\lim_\limits{\Delta t\rightarrow0}\frac{\Delta\alpha}{\Delta s}\big{|}$存在；
+
+则称该点曲率存在，且$$K=\frac{|y''(t)x'(t)-x''(t)y'(t)|}{\big{[}[x'(t)]^2+[y'(t)]^2\big{]}^\frac{3}{2}}$$或$$K=\frac{|y''(x)|}{\big{[}1+[y'(x)]^2\big{]}^\frac{3}{2}}$$。
+
+**<font color="red" size=5>旋转曲面的面积定理</font>**：若参数方程满足：
+
+(1) 光滑；
+
+(2) $y(t)\geq0$；
+
+则由曲线绕$x$轴所得曲面的面积为$$S=2\pi\int_\alpha^\beta y(t)\sqrt{[x'(t)]^2+[y'(t)]^2}dt$$。
+
+# 反常积分
+## 无穷积分
+**<font color="red" size=5>无穷积分收敛的Cauchy准则</font>**
+
+$\int_a^{+\infty}f(x)dx$存在等价于$\Leftrightarrow$
+
+$\forall\ \varepsilon>0,\exists\ G\geq a$，当$u_1,u_2>G$时有$$\Big|\int_{u_1}^{u_2}f(x)dx\Big|<\varepsilon$$。
+
+**<font color="red" size=5>线性性质</font>**：若$f$、$g$满足：
+
+(1) $\int_a^{+\infty}f(x)dx$与$\int_a^{+\infty}g(x)dx$都存在；
+
+则$$\int_a^{+\infty}[k_1f(x)+k_2g(x)]dx=k_1\int_a^{+\infty}f(x)dx+k_2\int_a^{+\infty}g(x)dx$$，其中$k_1$与$k_2$是常数。
+
+**<font color="red" size=5>积分区间可加性质</font>**：若$f$满足：
+
+(1) 在$[a,u]$上可积（$\forall\ u\in(a,+\infty)$）；
+
+则$\int_a^{+\infty}f(x)dx$与$\int_b^{+\infty}f(x)dx$同敛散（$a<b$），且$$\int_a^{+\infty}f(x)dx=\int_a^bf(x)dx+\int_b^{+\infty}f(x)dx$$。
+
+**<font color="red" size=5>绝对收敛性</font>**：若$f$满足：
+
+(1) 在$[a,u]$上可积（$\forall\ u\in(a,+\infty)$）；
+
+(2) $\int_a^{+\infty}|f(x)|dx$存在；
+
+则$\int_a^{+\infty}f(x)dx$存在，且$$\Big|\int_a^{+\infty}f(x)dx\Big|\leq\int_a^{+\infty}|f(x)|dx$$。
+
+**<font color="red" size=5>非负函数无穷积分比较敛散判别法</font>**：若$f$、$g$满足：
+
+(1) 都在$[a,u]$上可积（$\forall\ u\in(a,+\infty)$）；
+
+(2) $g(x)\geq f(x)\geq0$；
+
+则，$\int_a^{+\infty}g(x)dx$收敛$\Rightarrow$$\int_a^{+\infty}f(x)dx$收敛；$\int_a^{+\infty}f(x)dx$发散$\Rightarrow$$\int_a^{+\infty}g(x)dx$发散。
+
+**<font color="#f47e76" size=4>推论</font>**：若$f$、$g$满足：
+
+(1) 都在$[a,u]$上可积（$\forall\ u\in(a,+\infty)$）；
+
+(2) $f(x)\geq0$，$g(x)>0$；
+
+则，当$\lim_\limits{x\rightarrow+\infty}\frac{f(x)}{g(x)}<+\infty$时，$\int_a^{+\infty}g(x)dx$收敛$\Rightarrow$$\int_a^{+\infty}f(x)dx$收敛；当$\lim_\limits{x\rightarrow+\infty}\frac{f(x)}{g(x)}>0$时，$\int_a^{+\infty}g(x)dx$发散$\Rightarrow$$\int_a^{+\infty}f(x)dx$发散。
+
+**<font color="red" size=5>一般无穷积分敛散判别法（Dirichlet判别法）</font>**：若$f$、$g$满足：
+
+(1) $\int_a^xf(t)dt$在$[a,+\infty)$上有界；
+
+(2) $g(x)$在$[a,+\infty)$上单调，且$\lim_\limits{x\rightarrow+\infty}g(x)=0$；
+
+则$$\int_a^{+\infty}f(x)g(x)dx$$存在。
+
+**<font color="#f47e76" size=4>推论（Abel判别法）</font>**：若$f$、$g$满足：
+
+(1) $\int_a^{+\infty}f(x)dx$存在；
+
+(2) $g(x)$在$[a,+\infty)$上单调有界；
+
+则$$\int_a^{+\infty}f(x)g(x)dx$$存在。
+
+## 瑕积分
+
+# 多元函数极限与连续
+## 二元函数极限
+**<font color="red" size=5>平面点列收敛的Cauchy准则</font>**：
+
+平面点列$\{P_n\}$收敛。等价于$\Leftrightarrow$ $\forall\ \varepsilon>0$，$\exists\ N>0$，当$n_1,n_2>N$时，有$$\rho(P_{n_1},P_{n_2})<\varepsilon$$。
+
+**<font color="red" size=5>二元函数收敛的Heine定理</font>**：
+
+${\lim_\limits{P\rightarrow P_0}}_\limits{P\in D}f(P)=A$。等价于$\Leftrightarrow$ $\forall\ E\subset D$，$P_0$是$E$的聚点，有$${\lim_\limits{P\rightarrow P_0}}_\limits{P\in E}f(P)=A$$。
+
+**<font color="#f47e76" size=4>推论</font>**：
+
+${\lim_\limits{P\rightarrow P_0}}_\limits{P\in D}f(P)=A$。等价于$\Leftrightarrow$ $\forall\ \{P_n\}\subset D\backslash P_0$，$\lim_\limits{n\rightarrow\infty}P_n=P_0$，$$\lim_\limits{n\rightarrow\infty}f(P_n)=A$$。
+
+**<font color="red" size=5>二元函数重极限和累次极限相等定理</font>**：若$f$满足：
+
+(1) $\lim_\limits{(x,y)\rightarrow(x_0,y_0)}f(x,y)$存在；
+
+(2) $\lim_\limits{x\rightarrow x_0}\lim_\limits{y\rightarrow y_0}f(x,y)$存在；
+
+则它们相等。
+
+**<font color="#f47e76" size=4>推论</font>**：若$f$满足：
+
+(1) $\lim_\limits{x\rightarrow x_0}\lim_\limits{y\rightarrow y_0}f(x,y)\neq\lim_\limits{y\rightarrow x_0}\lim_\limits{x\rightarrow y_0}f(x,y)$；
+
+则$\lim_\limits{(x,y)\rightarrow(x_0,y_0)}f(x,y)$不存在。
+
+## 二元函数连续
+**<font color="red" size=5>复合函数连续性定理</font>**：若
+
+(1) $\varphi(x,y)$与$\psi(x,y)$在$xy$平面上的点$P_0=(x_0,y_0)$处连续；
+
+(2) $f(u,v)$在$uv$平面上的点$Q_0=(u_0,v_0)$处连续；
+
+(3) $\{(u,v)|u=\varphi(x,y),v=\psi(x,y),(x,y)\subset D\}\subset D'$（复合条件）；
+
+则$$f[\varphi(x,y),\psi(x,y)]$$在$xy$平面上的点$P_0=(x_0,y_0)$处连续。
+
+**<font color="red" size=5>有界性与最大值、最小值定理</font>**：若$f$满足：
+
+(1) 在**有界闭集**$D\subset \mathbb{R}^2$上连续；
+
+则$f$在$D$上有界，可以取到最大值和最小值。
+
+**<font color="red" size=5>一致连续性定理</font>**：若$f$满足：
+
+(1) 在**有界闭集**$D\subset \mathbb{R}^2$上连续；
+
+则对于任何的点$P,Q\in D$，都有$\forall\ \varepsilon>0$，$\exists\ \delta>0$，当$\rho(P,Q)<\delta$时，$$|f(P)-f(Q)|<\varepsilon$$。
+
+**<font color="red" size=5>介值性定理</font>**：若$f$满足：
+
+(1) 在**区域**$D\subset \mathbb{R}^2$上连续；
+
+则对于任何的点$P,Q\in D,\ f(P)<f(Q)$，都有$$(\ f(P),f(Q)\ )\subset f(D)$$。
+
+# 多元函数微分
+
+**<font color="red" size=5>可微等价条件</font>**：
+
+$f$在$(x_0,y_0)$可微。等价于$\Leftrightarrow$ 曲面$z=f(x,y)$在$(x_0,y_0)$具有不平行于$z$轴的切平面。
+
+**<font color="red" size=5>可微必要条件</font>**：若$f$满足：
+
+(1) 在$(x_0,y_0)$可微；
+
+则$f$在$(x_0,y_0)$的偏导数都存在，且$$A=\frac{\partial f}{\partial x}\Bigg{|}_{(x_0,y_0)};B=\frac{\partial f}{\partial y}\Bigg{|}_{(x_0,y_0)}$$。
+
+<font color="blue">注：$f$在$(x_0,y_0)$可微$\Rightarrow$$f$在$(x_0,y_0)$连续。（由微分的定义，这是显然的）</font>
+
+**<font color="red" size=5>可微充分条件</font>**：若$f$满足：
+
+(1) $f_x$与$f_y$在$(x_0,y_0)$上连续；
+
+则$f$在$(x_0,y_0)$可微。
+
+**<font color="red" size=5>复合函数微分法</font>**：若：
+
+(1) $u=\varphi(x,y)$与$v=\psi(x,y)$在$(x_0,y_0)$处可微，$\begin{cases}u_0=\varphi(x_0,y_0)\\v_0=\psi(x_0,y_0)\end{cases}$；
+
+(2) $z=f(u,v)$在$(u_0,v_0)$处可微；
+
+(3) $\{(u,v)|u=\varphi(x,y),v=\psi(x,y),(x,y)\subset D\}\subset D'$；
+
+则复合函数$f[\varphi(x,y),\psi(x,y)]$在$(x_0,y_0)$处可微，且$$\frac{\partial f}{\partial x}=\frac{\partial f}{\partial u}\frac{\partial \varphi}{\partial x}+\frac{\partial f}{\partial v}\frac{\partial \psi}{\partial x}$$$$\frac{\partial f}{\partial y}=\frac{\partial f}{\partial u}\frac{\partial \varphi}{\partial y}+\frac{\partial f}{\partial v}\frac{\partial \psi}{\partial y}$$。
+
+**<font color="#f47e76" size=4>推论（链式法则）</font>**：若$f$满足：
+
+(1) $u=\varphi(x,y)$与$v=\psi(x,y)$在$(x_0,y_0)$处偏导数都存在，$\begin{cases}u_0=\varphi(x_0,y_0)\\v_0=\psi(x_0,y_0)\end{cases}$；
+
+(2) $z=f(u,v)$在$(u_0,v_0)$处可微；
+
+(3) $\{(u,v)|u=\varphi(x,y),v=\psi(x,y),(x,y)\subset D\}\subset D'$；
+
+则$$\frac{\partial f}{\partial x}=\frac{\partial f}{\partial u}\frac{\partial \varphi}{\partial x}+\frac{\partial f}{\partial v}\frac{\partial \psi}{\partial x}$$$$\frac{\partial f}{\partial y}=\frac{\partial f}{\partial u}\frac{\partial \varphi}{\partial y}+\frac{\partial f}{\partial v}\frac{\partial \psi}{\partial y}$$。
+
+**<font color="red" size=5>任意方向导数定理</font>**：若$f$满足：
+
+(1) 在$(x_0,y_0)$处可微；
+
+则$f$在$(x_0,y_0)$的任意方向导数存在，且$$f_{\boldsymbol{l}}(x_0,y_0)=\frac{\partial f}{\partial x}\cos{\alpha}+\frac{\partial f}{\partial y}\cos{\beta}$$，其中$\boldsymbol{l}=(\cos{\alpha,\cos{\beta}})$。
+
+**<font color="red" size=5>二阶混合偏导数定理</font>**：若$f$满足：
+
+(1) $f_{xy}(x,y)$与$f_{yx}(x,y)$在$(x_0,y_0)$存在；
+
+(2) $f_{xy}(x,y)$与$f_{yx}(x,y)$在$(x_0,y_0)$连续；
+
+则$$f_{xy}(x_0,y_0)=f_{yx}(x_0,y_0)$$。
+
+**<font color="red" size=5>二元函数中值定理（凸域）</font>**：若$f$满足：
+
+(1) 在**凸开域**$D\subset \mathbb{R}^2$上可微；
+
+则$\forall\ P(a,b),Q(a+h,b+k)\subset D$，$\exists\ \theta\in(0,1)$，使$$f(a+h,b+k)-f(a,b)=f_x(a+\theta h,b+\theta k)\cdot h+f_y(a+\theta h,b+\theta k)\cdot k$$。
+
+**<font color="#f47e76" size=4>推论</font>**：若$f$满足：
+
+(1) 在$P(a,b)$与$Q(a+h,b+k)$及其连线上可微；
+
+则$\exists\ \theta\in(0,1)$，使$$f(a+h,b+k)-f(a,b)=f_x(a+\theta h,b+\theta k)\cdot h+f_y(a+\theta h,b+\theta k)\cdot k$$。
+
+**<font color="#f47e76" size=4>推论</font>**：若$f$满足：
+
+(1) 在区域$D$上存在偏导数，且$f_x=f_y\equiv0$；
+
+则$f$在$D$上为常量函数。
+
+**<font color="red" size=5>二元函数中值定理</font>**：若$f$满足：
+
+(1) 在$U(P_0)$上偏导数都存在；
+
+则对于$(x,y)\in U(P_0)$，$\exists\ \theta_1,\theta_2\in(0,1)$，使$$\begin{align}f(x,y)-f(x_0,y_0)=&f_x\big{(}x_0+\theta_1(x-x_0),y_0\big{)}(x-x_0)+\\&f_y\big{(}x_0,y_0+\theta_2(y-y_0)\big{)}(y-y_0)\end{align}$$。
+
+**<font color="red" size=5>二元函数Taylor定理</font>**：若$f$满足：
+
+(1) 在$P(a,b)$的某邻域上有$n+1$阶连续偏导数；
+
+则$\forall\ Q(a+h,b+k)\in U(P)$，$\exists\ \theta\in(0,1)$，使$$f(a+h,b+k)-f(a,b)=\frac{1}{1!}(h\cdot\frac{\partial}{\partial u}+k\cdot\frac{\partial}{\partial v})^1f(a,b)+...\\+\frac{1}{n!}(h\cdot\frac{\partial}{\partial u}+k\cdot\frac{\partial}{\partial v})^nf(a,b)+\frac{1}{(n+1)!}(h\cdot\frac{\partial}{\partial u}+k\cdot\frac{\partial}{\partial v})^{n+1}f(a+\theta h,b+\theta k)$$，其中$$(h\frac{\partial}{\partial u}+k\frac{\partial}{\partial v})^nf(a,b)=\sum_{i=0}^nC_n^i\frac{\partial^n}{\partial u^i\partial v^{n-i}}f(a,b)\cdot h^ik^{n-i}$$。
+
+<font color="blue">注：一元函数仅要求存在$n+1$阶导数。二元函数还要求$n+1$阶导数连续，因为只有这样才能够保证能够使用链式法则求二元函数的$n+1$阶偏导数。</font>
+
+**<font color="red" size=5>二元函数极值必要条件</font>**：若$f$满足：
+
+(1) 在$P_0$处取得极值；
+
+(2) 在$P_0$处偏导数都存在；
+
+则$$f_x(x_0,y_0)=f_y(x_0,y_0)=0$$。
+
+**<font color="red" size=5>二元函数极值充分条件</font>**：若$f$满足：
+
+(1) 在$U(P_0)$上具有连续二阶偏导数；
+
+(2) $f_x(P_0)=f_y(P_0)=0$（$P_0$是稳定点）；
+
+则当$\boldsymbol{H}_f(P_0)$是正定矩阵时，$f$在$P_0$取得极小值；
+
+当$\boldsymbol{H}_f(P_0)$是负定矩阵时，$f$在$P_0$取得极大值；
+
+当$\boldsymbol{H}_f(P_0)$是不定矩阵时，$f$在$P_0$不取极值。
+
+# 隐函数
+## 隐函数存在定理
+
+**<font color="red" size=5>隐函数存在唯一性定理</font>**：若$F$满足：
+
+(1) 在$D\subset \mathbb{R}^2$上连续，$P_0(x_0,y_0)$是$D$上内点；
+
+(2) $F(x_0,y_0)=0$；
+
+(3) $F_y(x,y)$在$D$上连续；
+
+(4) $F_y(x_0,y_0)\neq0$；
+
+则$F(x,y)=0$能在某$U(P_0)$上唯一确定隐函数$y=f(x)$，$x\in U(x_0;\alpha)$$$(x,f(x))\in U(P_0)$$$$F(x,f(x))\equiv0$$$$y_0=f(x_0)$$；该隐函数还满足$f(x)$在$U(x_0;\alpha)$上连续。
+
+**<font color="red" size=5>隐函数可微性定理</font>**：若$F$满足：
+
+(1) 隐函数存在唯一性定理中所有条件；
+
+(2) $F_x(x,y)$在$D$上连续；
+
+则$y=f(x)$在$U(x_0;\alpha)$上存在连续导函数，且$$f'(x)=-\frac{F_x(x,y)}{F_y(x,y)}$$。
+
+**<font color="#f47e76" size=4>推论</font>**：若$F$满足：
+
+(1) 在$V\subset \mathbb{R}^3$上连续，$P_0(x_0,y_0,z_0)$是$V$上内点；
+
+(2) $F(x_0,y_0,z_0)=0$；
+
+(3) $F_x(x,y,z)$、$F_y(x,y,z)$、$F_z(x,y,z)$在$V$上连续；
+
+(4) $F_z(x_0,y_0,z_0)\neq0$；
+
+则$F(x,y,z)=0$能在某$U(P_0)$上唯一确定隐函数$z=f(x,y)$，$(x,y)\in U((x_0,y_0))$$$(x_0,y_0,f(x_0,y_0))\in U(P_0)$$$$F(x,y,f(x,y))\equiv0$$$$z_0=f(x_0,y_0)$$；该隐函数还满足$f(x,y)$在$U((x_0,y_0))$上具有连续偏导数，且$$f_x=-\frac{F_x}{F_z};\ \ f_y=-\frac{F_y}{F_z}$$
+
+
+## 隐函数组定理
+
+**<font color="red" size=5>隐函数组定理</font>**：若$F$和$G$满足：
+
+(1) 定义域为$V\subset \mathbb{R}^4$，$P_0(x_0,y_0,u_0,v_0)$是$V$上内点；
+
+(2) $F(x_0,y_0,u_0,v_0)=G(x_0,y_0,u_0,v_0)=0$；
+
+(3) 在$V$上都具有一阶连续偏导数；
+
+(4) $\frac{\partial(F,G)}{\partial(u,v)}\Bigg{|}_{P_0}\neq0$；
+
+则$F(x,y,u,v)$；$G(x,y,u,v)$能在某$U(P_0)$上唯一确定隐函数组$u=u(x,y)$；$v=v(x,y)$，$(x,y)\in U((x_0,y_0))$$$(x,y,u(x,y),v(x,y))\in U(P_0)$$$$F(x,y,u(x,y),v(x,y))\equiv0;G(x,y,u(x,y),v(x,y))\equiv0$$$$u_0=u(x_0,y_0);v_0=v(x_0,y_0)$$；隐函数组$u(x,y)$与$v(x,y)$还满足在$U(Q_0)$上具有一阶连续偏导数且$$\frac{\partial u}{\partial x}=-\frac{1}{\boldsymbol{J}}\frac{\partial(F,G)}{\partial(x,v)};\frac{\partial u}{\partial y}=-\frac{1}{\boldsymbol{J}}\frac{\partial(F,G)}{\partial(y,v)}$$$$\frac{\partial v}{\partial x}=-\frac{1}{\boldsymbol{J}}\frac{\partial(F,G)}{\partial(u,x)};\frac{\partial v}{\partial y}=-\frac{1}{\boldsymbol{J}}\frac{\partial(F,G)}{\partial(u,y)}$$。
+
+**<font color="#f47e76" size=4>推论（反函数组定理）</font>**：若$x(u,v)$、$y(u,v)$满足：
+
+(1) 定义域为$D\subset \mathbb{R}^2$，$P(u_0,v_0)$是$D$上内点；
+
+(2) $x_0=u(u_0,v_0)$；$y_0=v(u_0,v_0)$；
+
+(3) 在$D$上都具有一阶连续偏导数；
+
+(4) $\frac{\partial(x,y)}{\partial(u,v)}\neq0$；
+
+则$x=x(u,v)$；$y=y(u,v)$能在$U(P_0)$上唯一确定一反函数组$u=u(x,y)$；$v=v(x,y)$，$(x,y)\in U(P'_0)$$$(u(x,y),v(x,y))\in U(P_0)$$$$u_0=u(x_0,y_0);v_0=v(x_0,y_0)$$；反函数组$u=u(x,y)$；$v=v(x,y)$还满足在$U(P'_0)$上具有一阶连续偏导数且$$\frac{\partial u}{\partial x}=\frac{\partial y}{\partial v}/\frac{\partial(x,y)}{\partial(u,v)};\frac{\partial u}{\partial y}=-\frac{\partial x}{\partial v}/\frac{\partial(x,y)}{\partial(u,v)}$$$$\frac{\partial v}{\partial x}=-\frac{\partial y}{\partial u}/\frac{\partial(x,y)}{\partial(u,v)};\frac{\partial v}{\partial y}=\frac{\partial x}{\partial u}/\frac{\partial(x,y)}{\partial(u,v)}$$。
+
+## Lagrange数乘法
+
+**<font color="red" size=5>Lagrange数乘法</font>**：若目标函数$f$和条件函数$\varphi_k=0\ (k=1,2,...,m)$满足：
+
+(1) 定义域为$D\subset \mathbb{R}^n$，$P(x^{(0)}_1,x^{(0)}_2,...,x^{(0)}_n)$是$D$上内点，**也是$f$的极值点**；
+
+(2) 在$D$上都具有一阶连续偏导数；
+
+(3) $\frac{\partial(\varphi_1,\varphi_2,...,\varphi_m)}{\partial(x_1,x_2,...,x_m)}\Bigg{|}_{P_0}$的秩为$m$；
+
+则存在$m$个常数$\lambda_1$，$\lambda_2$，...，$\lambda_m$，使得$(x^{(0)}_1,...,x^{(0)}_n,\lambda_1,...,\lambda_m)$为Lagrange函数$$f(x_1,x_2,..,x_n)+\sum_{i=1}^m\lambda_i\varphi_i(x_1,x_2,...,x_n)$$的稳定点。
+
+<font color="blue">注：Lagrange数乘法不是判断条件极值的充分条件。在明确有条件极值的情况下可利用它来寻找条件极值。</font>
+
+# 含参量积分
+## 含参量正常积分
+**<font color="red" size=5>连续性定理一</font>**：若$f$满足：
+
+(1) 在$[a,b]\times[c,d]$上连续；
+
+则$\varphi(x)=\int_c^df(x,y)dy$在$[a,b]$上连续，即$$\lim_\limits{x\rightarrow x_0}\int_c^df(x,y)dy=\int_c^d\lim_\limits{x\rightarrow x_0}f(x,y)dy$$，其中$x_0\in[a,b]$。
+
+<font color="blue">注：$[a,b]$可更改为区间$I$。</font>
+
+**<font color="red" size=5>连续性定理二</font>**：若$f$满足：
+
+(1) 在$\{(x,y)|a\leq x\leq b,c(x)\leq y\leq d(x)\}$上连续；
+
+(2) $c(x)$、$d(x)$是$[a,b]$上的连续函数；
+
+则$$F(x)=\int_{c(x)}^{d(x)}f(x,y)dy$$在$[a,b]$上连续。
+
+**<font color="red" size=5>可微性定理一</font>**：若$f$满足：
+
+(1) 在$[a,b]\times[c,d]$上连续；
+
+(2) $\frac{\partial}{\partial x}f(x,y)$在$[a,b]\times[c,d]$上连续；
+
+则$\varphi(x)=\int_c^df(x,y)dy$在$[a,b]$上可微，且$$\frac{d}{dx}\int_c^df(x,y)dy=\int_c^d\frac{\partial }{\partial x}f(x,y)dy$$。
+
+**<font color="red" size=5>可微性定理二</font>**：若$f$满足：
+
+(1) 在$[a,b]\times[c,d]$上连续；
+
+(2) $\frac{\partial}{\partial x}f(x,y)$在$[a,b]\times[c,d]$上连续；
+
+(3) $c(x)$、$d(x)$是$[a,b]$上的可微函数，其值含于$[c,d]$；
+
+则$F(x)=\int_{c(x)}^{d(x)}f(x,y)dy$在$[a,b]$上可微，且$$\frac{d}{dx}\int_{c(x)}^{d(x)}f(x,y)dy=\int_{c(x)}^{d(x)}f_x(x,y)dy+f(x,d(x))d'(x)-f(x,c(x))c'(x)$$。
+
+**<font color="red" size=5>可积性定理</font>**：若$f$满足：
+
+(1) 在$[a,b]\times[c,d]$上连续；
+
+则$\varphi(x)=\int_c^df(x,y)dy$与$\psi(y)=\int_a^bf(x,y)dx$分别在$[a,b]$和$[c,d]$上都可积，且$\int_a^b\varphi(x)dx=\int_c^d\psi(y)dy$，即$$\int_a^bdx\int_c^df(x,y)dy=\int_c^ddy\int_a^bf(x,y)dx$$。
+
+## 含参量反常积分
+**<font color="red" size=5>含参量无穷积分一致收敛的Cauchy准则</font>**：
+
+$\int_c^{+\infty}f(x,y)dy$在$I$上一致收敛。 等价于$\Leftrightarrow$ $\forall\ \varepsilon>0$，$\exists\ N>c$，当$A_1,A_2>N$时，$\forall\ x\in I$，有$$\Big{|}\int_{A_1}^{A_2}f(x,y)dy\Big{|}<\varepsilon$$。
+
+**<font color="red" size=5>含参量无穷积分一致收敛的另一充要条件</font>**：
+
+$\int_c^{+\infty}f(x,y)dy$在$I$上一致收敛。 等价于$\Leftrightarrow$ $$\lim_\limits{A\rightarrow\infty}\sup_\limits{x\in I}\Big{|}\int_A^{+\infty}f(x,y)dy\Big{|}=0$$。
+
+<font color="blue">注：$\int_A^{+\infty}f(x,y)dy$不一定能够显式地表现出来。</font>
+
+**<font color="red" size=5>含参量无穷积分一致收敛与函数项级数一致收敛的关系</font>**：
+
+$\int_c^{+\infty}f(x,y)dy$在$I$上一致收敛。 等价于$\Leftrightarrow$ 对任一趋于$+\infty$的单调递增数列$\{A_n\}\ \ (A_1=c)$，$$\sum_{n=1}^{\infty}\int_{A_{n}}^{A_{n+1}}f(x,y)dy$$在$I$上一致收敛。
+
+**<font color="red" size=5>含参量无穷积分Weierstrass判别法</font>**：若$f$满足：
+
+(1) 在$(x,y)\in I\times[c,+\infty)$上，有$|f(x,y)|<g(y)$，其中$\int_c^{+\infty}g(y)dy$收敛；
+
+则$\int_c^{+\infty}f(x,y)dy$在$I$上一致收敛。
+
+**<font color="red" size=5>含参量无穷积分Dirichlet判别法</font>**：若$f(x,y)$与$g(x,y)$满足：
+
+(1) $\int_c^Nf(x,y)dy$，$N\in(c,+\infty)$，在$I$上一致有界；
+
+(2) $\forall\ x\in I$，$g(x,y)$为$y$的单调函数，且$g(x,y)\rightrightarrows0\ \ (y\rightarrow+\infty), x\in I$。
+
+则$\int_c^{+\infty}f(x,y)g(x,y)dy$在$I$上一致收敛。
+
+
+**<font color="red" size=5>含参量无穷积分Abel判别法</font>**：若$f(x,y)$与$g(x,y)$满足：
+
+(1) $\int_c^{+\infty}f(x,y)dy$在$I$上一致收敛；
+
+(2) $\forall\ x\in I$，$g(x,y)$为$y$的单调函数，且$g(x,y)$对$x$一致有界。
+
+则$\int_c^{+\infty}f(x,y)g(x,y)dy$在$I$上一致收敛。
+
+## 含参量反常积分的性质
+**<font color="red" size=5>含参量无穷积分的连续性</font>**：若$f$满足：
+
+(1) $I\times[c,+\infty)$上连续；
+
+(2) $\int_c^{+\infty}f(x,y)dy$在$I$上一致收敛（或内闭一致收敛）；
+
+则$\int_c^{+\infty}f(x,y)dy$在$I$上连续，即$$\lim_\limits{x\rightarrow x_0}\int_c^{+\infty}f(x,y)dy=\int_c^{+\infty}\lim_\limits{x\rightarrow x_0}f(x,y)dy$$，其中$x_0\in I$。
+
+**<font color="red" size=5>含参量无穷积分的可微性</font>**：若$f$满足：
+
+(1) $f(x,y)$与$f_x(x,y)$在$I\times[c,+\infty)$上连续；
+
+(2) $\int_c^{+\infty}f_x(x,y)dy$在$I$上一致收敛；
+
+(3) $\int_c^{+\infty}f(x,y)dy$在$I$上收敛；
+
+则$\int_c^{+\infty}f(x,y)dy$在$I$上可微，即$$\frac{d}{dx}\int_c^{+\infty}f(x,y)dy=\int_c^{+\infty}f_x(x,y)dy$$。
+
+**<font color="red" size=5>含参量无穷积分的可积性1</font>**：若$f$满足：
+
+(1) 在$[a,b]\times[c,+\infty)$上连续；
+
+(2) $\int_c^{+\infty}f(x,y)dy$关于$x$在$[a,b]$上一致收敛；
+ 
+则$\int_c^{+\infty}f(x,y)dy$在$I$上可积，且$$\int_a^bdx\int_c^{+\infty}f(x,y)dy=\int_c^{+\infty}dy\int_a^bf(x,y)dx$$。
+
+**<font color="red" size=5>含参量无穷积分的可积性2</font>**：若$f$满足：
+
+(1) 在$[a,+\infty)\times[c,+\infty)$连续；
+
+(2) $\int_c^{+\infty}f(x,y)dy$关于$x$在$[a,+\infty)$上内闭一致收敛；
+
+(3) $\int_c^{+\infty}dy\int_a^{+\infty}|f(x,y)|dx$存在；
+
+则$$\int_a^{+\infty}dx\int_c^{+\infty}f(x,y)dy=\int_c^{+\infty}dy\int_a^{+\infty}f(x,y)dx$$；
+
+# 曲线积分
+此部分未特别说明的参数方程都指：
+$$
+\begin{cases}
+y=y(t)\\
+x=x(t)
+\end{cases}t\in[\alpha,\beta]
+$$
+
+**<font color="red" size=5>Ⅰ型曲线积分计算定理</font>**：若$f$满足：
+
+(1) 在$L$上连续，其中$L$为满足参数方程的光滑曲线；
+
+则$$\int_\limits{L}f(x,y)ds=\int_\alpha^\beta f[x(t),y(t)]\sqrt{[x'(t)]^2+[y'(t)]^2}dt$$。
+
+**<font color="red" size=5>Ⅱ型曲线积分计算定理</font>**：若$P$、$Q$满足：
+
+(1) 在$L$上连续，其中$L$满足参数方程，且$y(t)$、$x(t)$在$[\alpha,\beta]$具有连续导数；
+
+则$$\int_\limits{L}P(x,y)dx+Q(x,y)dy=\int_\alpha^\beta \big{[}P[x(t),y(t)]x'(t)+Q[x(t),y(t)]y'(t)\big{]}dt$$。
+
+# 重积分
+## 二重积分的可积条件
+**<font color="red" size=5>可积必要条件</font>**：若$f$满足：
+
+(1) 在可求面积、有界闭域$D$上可积；
+
+则$f$在$D$上有界。
+
+**<font color="red" size=5>可积充要条件</font>**：
+
+$f$在$D$上可积。等价于$\Leftrightarrow$$$\lim_\limits{||T||\rightarrow0}\bigg{[}\sum_{i=1}^n(M_i-m_i)\Delta\sigma_i\bigg{]}=0$$。
+
+**<font color="red" size=5>可积第一充分条件</font>**：若$f$满足：
+
+(1) 在有界闭域$D$上连续；
+
+则$f$在$D$上可积。
+
+**<font color="red" size=5>可积第二充分条件</font>**：若$f$满足：
+
+(1) 在有界闭域$D$上有界；
+
+(2) $D$上不连续点集是零面积集；
+
+则$f$在$D$上可积。
+
+## 二重积分的性质
+符合定积分所有性质。
+
+**<font color="red" size=5>积分中值定理</font>**：若$f$满足：
+
+(1) 在有界闭域$D$上连续；
+
+则$\exists (\xi,\eta)\in D$，使得$$\iint_Df(x,y)d\sigma=f(\xi,\eta)S_D$$。
+
+## 二重积分的计算
+
+**<font color="red" size=5>定理1</font>**：若$f$满足：
+
+(1) 在$D=[a,b]\times[c,d]$上可积；
+
+(2) $\forall x\in [a,b]$，$\int_c^df(x,y)dy$存在；
+
+则$\int_a^bdx\int_c^df(x,y)dy$存在，且$$\iint_Df(x,y)d\sigma=\int_a^bdx\int_c^df(x,y)dy$$。
+
+**<font color="#f47e76" size=4>推论</font>**：若$f$满足：
+
+(1) 在$[a,b]\times[c,d]$上连续；
+
+则$$\iint_Df(x,y)d\sigma=\int_a^bdx\int_c^df(x,y)dy=\int_c^ddy\int_a^bf(x,y)dx$$。
+
+**<font color="red" size=5>定理2</font>**：若$f$满足：
+
+(1) 在$D=\{(x,y)|a\leq x\leq b,c(x)\leq y\leq d(x)\}$上可积，其中$c(x)$、$d(x)$在$[a,b]$上连续；
+
+(2) $\forall x\in[a,b]$，$\int_{c(x)}^{d(x)}f(x,y)dy$都存在；
+
+则$\int_a^bdx\int_{c(x)}^{d(x)}f(x,y)dy$存在，且$$\iint_Df(x,y)d\sigma=\int_a^bdx\int_{c(x)}^{d(x)}f(x,y)dy$$。
+
+**<font color="#f47e76" size=4>推论</font>**：若$f$满足：
+
+(1) 在$D=\{(x,y)|a\leq x\leq b,c(x)\leq y\leq d(x)\}$上连续，其中$c(x)$、$d(x)$在$[a,b]$上连续；
+
+则$\int_a^bdx\int_{c(x)}^{d(x)}f(x,y)dy$存在，且$$\iint_Df(x,y)d\sigma=\int_a^bdx\int_{c(x)}^{d(x)}f(x,y)dy$$。
+
+## Green公式
+**<font color="red" size=5>Green公式</font>**：若$P$、$Q$满足：
+
+(1) 在闭域$D$上具有一阶连续偏导数，其中$D$由分段光滑曲线$L$（取正向）所围成；
+
+则$$\iint_\limits{D}\begin{vmatrix}\frac{\partial}{\partial x}&\frac{\partial}{\partial y}\\P&Q\end{vmatrix}d\sigma=\oint_\limits{L}Pdx+Qdy$$。
+
+**<font color="#f47e76" size=4>推论</font>**：若闭区域$D$满足：
+
+(1) 由分段光滑曲线$L$（取正向）所围成；
+
+则$$S_D=\frac{1}{2}\oint_\limits{L}xdy-ydx$$$$S_D=\oint_\limits{L}xdy$$。
+
+**<font color="red" size=5>曲线积分与路径无关定理</font>**：若$P$、$Q$满足：
+
+(1) 在单连通闭域$D$上具有一阶连续偏导数；
+
+则以下四个命题等价：
+
+**命题1**：对于$D$内任一分段光滑封闭曲线$L$，有$$\oint_\limits{L}Pdx+Qdy=0$$。
+
+**命题2**：对于$D$内任一分段光滑曲线$L$，曲线积分$\int_\limits{L}Pdx+Qdy$与路径无关。
+
+**命题3**：在$D$内存在某一函数$u(x,y)$，使得$$du=Pdx+Qdy$$。
+
+**命题4**：在$D$内有：$$\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}$$。
+
+## 二重积分换元积分法
+**<font color="red" size=5>定理</font>**：若变换$T$：$\begin{cases}x=x(u,v)\\y=y(u,v)\end{cases}$满足：
+
+(1) $x=x(u,v)$与$y=y(u,v)$具有连续一阶偏导数，且$J(u,v)=\begin{vmatrix}\frac{\partial x}{\partial u}&\frac{\partial x}{\partial v}\\\frac{\partial y}{\partial u}&\frac{\partial y}{\partial v}\end{vmatrix}\neq0\ \ (u,v)\in D'$；
+
+则变换$T$可将$uv$平面上由分段光滑曲线$L'$所围成的闭域$D'$映射到$xy$平面上由分段光滑曲线$L$所围成的闭域$D$上，且$$S_D=\iint_{D'}\big{|}J(u,v)\big{|}dudv$$。
+
+**<font color="red" size=5>二重积分换元积分法</font>**：若$f$与变换$T$：$\begin{cases}x=x(u,v)\\y=y(u,v)\end{cases}$满足：
+
+(1) $f$在有界闭域$D$上可积；
+
+(2) $x=x(u,v)$与$y=y(u,v)$具有连续一阶偏导数，且$J(u,v)=\begin{vmatrix}\frac{\partial x}{\partial u}&\frac{\partial x}{\partial v}\\\frac{\partial y}{\partial u}&\frac{\partial y}{\partial v}\end{vmatrix}\neq0\ \ (u,v)\in D'$；
+
+(3) $D'$为$uv$平面上由分段光滑曲线$L'$所围成的闭域，它能映射到$D$（此时已能满足一对一的映射关系）；
+
+则$$\iint_\limits{D}f(x,y)dxdy=\iint_\limits{D'}f[x(u,v),y(u,v)]|J(u,v)|dudv$$
+
+**<font color="#f47e76" size=4>推论</font>**：若$f$与变换$T$：$\begin{cases}x=\rho\cos\theta&0\leq\rho<+\infty\\y=\rho\sin\theta&\theta\in[0,2\pi]\end{cases}$满足：
+
+(1) 二重积分换元法中所有条件，其中$J(\rho,\theta)=\rho\neq0$条件可去掉；
+
+则$$\iint_\limits{D}f(x,y)dxdy=\iint_\limits{D'}f(\rho\cos\theta,\rho\sin\theta)\rho\ \ d\rho d\theta$$。
+
+## 三重积分
+三重积分的可积条件、性质、计算与二重积分相似。
+
+**<font color="red" size=5>柱坐标换元积分法</font>**：若$f$与$\begin{cases}x=\rho\cos\theta&0\leq\rho<+\infty\\y=\rho\sin\theta&\theta\in[0,2\pi]\\z=z&-\infty<z<+\infty\end{cases}$满足：
+
+(1) 类似于二重积分换元积分法中所有条件；
+
+则$$\iiint_\limits{\Omega}f(x,y,z)\ dV=\iiint_\limits{\Omega'}f(\rho\cos\theta,\rho\sin\theta,z)\rho\ d\rho d\theta dz$$。
+
+**<font color="red" size=5>球坐标换元积分法</font>**：若$f$与$\begin{cases}x=\rho\sin\varphi\cos\theta&0\leq\rho<+\infty\\y=\rho\sin\varphi\sin\theta&\theta\in[0,2\pi]\\z=\rho\cos\varphi&\varphi\in[0,\pi]\end{cases}$满足：
+
+(1) 类似于二重积分换元积分法中所有条件；
+
+则$$\iiint_\limits{\Omega}f(x,y,z)\ dV=\iiint_\limits{\Omega'}f(\rho\sin\varphi\cos\theta,\rho\sin\varphi\sin\theta,\rho\cos\varphi)\rho^2\sin\varphi\ d\rho d\varphi d\theta$$。
+
+
+# 曲面积分
+## Ⅰ型、Ⅱ型曲面积分
+**<font color="red" size=5>Ⅰ型曲面积分的计算定理</font>**：若$f$满足：
+
+(1) 在光滑曲面$S$上连续，其中$S$为$z=z(x,y)\ (x,y)\in D$；
+
+则$$\iint_\limits{S}f(x,y,z)dS=\iint_\limits{D}f(x,y,z(x,y))\sqrt{1^2+z_x^2+z_y^2}\ d\sigma$$。
+
+<font color="blue">注：目前还没有学习用参数方程表示$S$的情况。</font>
+
+**<font color="red" size=5>Ⅱ型曲面积分的计算定理</font>**：若$R$满足：
+
+(1) 在光滑曲面$S$（以上侧为正侧）上连续，其中$S$为$z=z(x,y)\ (x,y)\in D$；
+
+则$$\iint_\limits{S}R(x,y,z)dxdy=\iint_\limits{D}R(x,y,z(z,y))\ d\sigma$$。
+
+**<font color="red" size=5>Ⅰ型和Ⅱ型曲面积分关系定理</font>**：若$P$、$Q$、$R$满足：
+
+(1) 在光滑曲面$S$上连续，其中$S$正侧法向量为$(\cos\alpha,\cos\beta,\cos\gamma)$。
+
+则$$\iint_\limits{S}Pdydz+Qdxdz+Rdxdy=\iint_\limits{S}\big{(}P\cos\alpha+Q\cos\beta+R\cos\gamma\big{)}dS$$。
+
+**<font color="#f47e76" size=4>推论</font>**：若$P$、$Q$、$R$满足：
+
+(1) 在光滑曲面$S$（以上侧为正侧）上连续，其中$S$为$z=z(x,y)\ (x,y)\in D$；
+
+则$$\iint_\limits{S}Pdydz+Qdxdz+Rdxdy\\=\iint_\limits{D}\bigg{(}P\big{(}x,y,z(z,y)\big{)} (-z_x)+Q\big{(}x,y,z(z,y)\big{)}(-z_y)+R\big{(}x,y,z(z,y)\big{)}\bigg{)}\ d\sigma$$。
+
+## Gauss公式与Stocks公式
+
+**<font color="red" size=5>Gauss公式</font>**：若$P$、$Q$、$R$满足：
+
+(1) 在$V$上具有连续一阶偏导数，其中$V$由分片光滑双侧曲面$S$（取外侧）所围成；
+
+则$$\iiint_\limits{V}\big{(}\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}\big{)}dV=\mathop{\vcenter{\huge\unicode{x222F}\,}}_\limits{S}Pdydz+Qdxdz+Rdxdy$$。
+
+**<font color="#f47e76" size=4>推论</font>**：若空间$V$满足：
+
+(1) 由分片光滑双侧曲面（取外侧）所围成；
+
+则$$S_V=\frac{1}{3}\mathop{\vcenter{\huge\unicode{x222F}\,}}_\limits{S}xdydz+ydxdz+zdxdy$$$$S_V=\mathop{\vcenter{\huge\unicode{x222F}\,}}_\limits{S}xdydz=\mathop{\vcenter{\huge\unicode{x222F}\,}}_\limits{S}ydxdz=\mathop{\vcenter{\huge\unicode{x222F}\,}}_\limits{S}zdxdy$$。
+
+**<font color="red" size=5>Stocks公式</font>**：若$P$、$Q$、$R$满足：
+
+(1) 在曲面$S$及其分段光滑边界线$L$上具有一阶连续偏导数，其中以右手法则确定$S$与$L$的方向关系；
+
+则$$\iint_\limits{S}\begin{vmatrix}dydz&dxdz&dxdy\\\frac{\partial}{\partial x}&\frac{\partial}{\partial y}&\frac{\partial}{\partial z}\\P&Q&R\end{vmatrix}=\oint_\limits{L}Pdx+Qdy+Rdz$$。
+
+# 常数项级数
+## 常数项级数
+**<font color="red" size=5>级数收敛的Cauchy准则</font>**：
+
+级数$u_1+u_2+\cdots+u_n+\cdots$收敛。等价于$\Leftrightarrow$ $\forall\ \varepsilon>0$，$\exists\ N>0$，当$m>N$时，$\forall\ p\in N_+$，都有$$|u_m+u_{m+1}+\cdots+u_{m+p}|<\varepsilon$$。
+
+**<font color="#f47e76" size=4>推论</font>**：若$\sum{u_n}$满足：
+
+(1) 收敛；
+
+则$$\lim_\limits{n\rightarrow\infty}u_n=0$$。
+
+**<font color="red" size=5>收敛级数的线性组合性质</font>**：若$\sum{u_n}$与$\sum{v_n}$满足：
+
+(1) 都收敛；
+
+则$\sum{(cu_n+dv_n)}$收敛（$c,d$为常数），且$$\sum{(cu_n+dv_n)}=c\sum{u_n}+d\sum{v_n}$$。
+
+**<font color="red" size=5>收敛级数的任意加括号性质</font>**：若$\sum{u_n}$满足：
+
+(1) 收敛；
+
+则在$\sum{u_n}$中任意加括号不改变其收敛性和收敛值。
+
+**<font color="red" size=5>级数的修改有限项定理</font>**：若$\sum{u_n}$满足：
+
+则改变$\sum{u_n}$的有限项不改变其敛散性。
+
+## 正项级数
+**<font color="red" size=5>正项级数收敛充要条件</font>**：
+
+正项级数$\sum u_n$收敛 等价于$\Leftrightarrow$ $S_n$有上界。
+
+**<font color="red" size=5>正项级数收敛比较原则</font>**：若正项级数$\sum u_n$与$\sum v_n$满足：
+
+(1) $\exists\ N>0$，当$n>N$时，有$u_n\leq v_n$；
+
+则$\sum v_n$收敛$\Rightarrow$$\sum u_n$收敛；
+
+$\sum u_n$发散$\Rightarrow$$\sum v_n$发散；
+
+**<font color="#f47e76" size=4>推论</font>**：若正项级数$\sum u_n$与$\sum v_n$满足：
+
+(1) $\lim_\limits{n\rightarrow\infty}\frac{u_n}{v_n}=l$；
+
+则当$l<+\infty$时，$\sum v_n$收敛$\Rightarrow$$\sum u_n$收敛；
+
+当$0<l$时，$\sum v_n$发散$\Rightarrow$$\sum u_n$发散；
+
+**<font color="red" size=5>正项级数比式审敛法（Alembert判别法）</font>**：若正项级数$\sum u_n$满足：
+
+(1) $\exists\ N>0$，当$n>N$时有$\frac{u_{n+1}}{u_n}\leq l<1$；
+
+则$\sum u_n$收敛；
+
+或
+
+(1) $\exists\ N>0$，当$n>N$时有$\frac{u_{n+1}}{u_n}\geq1$；
+
+则$\sum u_n$发散；
+
+**<font color="#f47e76" size=4>推论1</font>**：若正项级数$\sum u_n$满足：
+
+(1) $\lim_\limits{n\rightarrow\infty}\frac{u_{n+1}}{u_n}=l$，其中$l$可为$+\infty$；
+
+则当$l<1$时，$\sum u_n$收敛；
+
+当$l>1$时，$\sum u_n$发散。
+
+**<font color="#f47e76" size=4>推论2</font>**：若正项级数$\sum u_n$满足：
+
+(1) $\overline{\lim}_\limits{n\rightarrow\infty}\frac{u_{n+1}}{u_n}<1$；
+
+则$\sum u_n$收敛；
+
+或(1) $\underline{\lim}_\limits{n\rightarrow\infty}\frac{u_{n+1}}{u_n}>1$；
+
+则$\sum u_n$发散。
+
+<font color="blue">学习陈纪修教材上的上极限与下极限</font>
+
+**<font color="red" size=5>正项级数根式审敛法（Cauchy判别法）</font>**：若正项级数$\sum u_n$满足：
+
+(1) $\exists\ N>0$，当$n>N$时，有$\sqrt[n]{u_n}\leq l<1$；
+
+则$\sum u_n$收敛；
+
+或
+
+(1) $\exists\ N>0$，当$n>N$时，有$\sqrt[n]{u_n}\geq1$；
+
+则$\sum u_n$发散。
+
+**<font color="#f47e76" size=4>推论1</font>**：若正项级数$\sum u_n$满足：
+
+(1) $\lim_\limits{n\rightarrow\infty}\sqrt[n]{u_n}=l$；
+
+则当$l<1$时，$\sum u_n$收敛；
+
+当$l>1$时，$\sum u_n$发散。
+
+**<font color="#f47e76" size=4>推论2</font>**：若正项级数$\sum u_n$满足：
+
+(1) $\overline{\lim}_\limits{n\rightarrow\infty}\sqrt[n]{u_n}=l$；
+
+则当$l<1$时，$\sum u_n$收敛；
+
+当$l>1$时，$\sum u_n$发散。
+
+## 一般项级数
+**<font color="red" size=5>Leibniz判别法</font>**：若$\{u_n\}$满足：
+
+(1) 单调递减；
+
+(2) $\lim_\limits{n\rightarrow\infty}{u_n}=0$；
+
+则由$\{u_n\}$构成的交错级数收敛。
+
+**<font color="red" size=5>绝对收敛</font>**：若$\sum u_n$满足：
+
+(1) $\sum{|u_n|}$收敛；
+
+则$\sum u_n$收敛。
+
+**<font color="red" size=5>Dirichlet判别法</font>**：若$\{u_n\}$、$\{v_n\}$满足：
+
+(1) $\sum_{k=1}^nu_k$有界；
+
+(2) $\{v_n\}$单调递减，且$\lim_\limits{n\rightarrow\infty}v_n=0$；
+
+则$\sum u_nv_n$收敛。
+
+**<font color="red" size=5>Abel判别法</font>**：若$\{u_n\}$、$\{v_n\}$满足：
+
+(1) $\sum u_n$存在；
+
+(2) $\{v_n\}$单调有界；
+
+则$\sum u_nv_n$收敛。
+
+# 函数项级数
+## 函数列一致收敛性
+**<font color="red" size=5>函数列一致收敛的Cauchy准则</font>**：
+
+$\{f_n\}$在$D$上一致收敛。等价于$\Leftrightarrow$ $\forall\ \varepsilon>0$，$\exists\ N>0$，当$m,n>N$时，$\forall\ x\in D$，有$$|f_m(x)-f_n(x)|<\varepsilon$$。
+
+**<font color="red" size=5>函数列一致收敛的另一充要条件</font>**：
+
+$\{f_n\}$在$D$上一致收敛。等价于$\Leftrightarrow$ $$\lim_\limits{n\rightarrow\infty}\mathop{\sup}_\limits{x\in D}|f_n(x)-f(x)|=0$$，其中$f$为$\{f_n\}$在$D$上的极限函数。
+
+**<font color="#f47e76" size=4>推论：函数列不一致收敛的充要条件</font>**：
+
+$\{f_n\}$在$D$上不一致收敛。等价于$\Leftrightarrow$ $\exists\ \{x_n\}\in D$使$$\lim_\limits{n\rightarrow\infty}|f_n(x_n)-f(x_n)|\neq0$$。
+
+## 函数项级数一致收敛性
+**<font color="red" size=5>函数项级数一致收敛的Cauchy准则</font>**：
+
+$\sum u_n(x)$在$D$上一致收敛。等价于$\Leftrightarrow$ $\forall\ \varepsilon>0$，$\exists\ N>0$，当$n>N$时，$\forall\ x\in D$，$\forall\ p>0$，有$$|S_{n+p}(x)-S_n(x)|<\varepsilon$$。
+
+**<font color="#f47e76" size=4>推论</font>**：若$\sum u_n(x)$满足：
+
+(1) 在$D$上一致收敛；
+
+则$\{u_n(x)\}$一致收敛于$0$。
+
+**<font color="red" size=5>函数项级数一致收敛的另一充要条件</font>**：
+
+$\sum u_n(x)$在$D$上一致收敛。等价于$\Leftrightarrow$ $$\lim_\limits{n\rightarrow\infty}\mathop{\sup}_\limits{x\in D}|S_{n}(x)-S(x)|<\varepsilon$$
+
+<font color="blue">注：$S_n(x)$与$S(x)$不一定能够显式地表现出来。</font>
+
+**<font color="red" size=5>函数项级数Weierstrass判别法（优级数判别法）</font>**：若$\sum u_n(x)$满足：
+
+(1) $\forall\ x\in D$，$|u_n(x)|\leq M_n$，其中$\sum M_n$为收敛正项级数；
+
+则$\sum u_n(x)$在$D$上一致收敛。
+
+**<font color="red" size=5>Dirichlet判别法</font>**：若$\{u_n(x)\}$、$\{v_n(x)\}$满足：
+
+(1) $\sum_{k=1}^nu_k(x)$在$D$上一致有界；
+
+(2) $\forall\ x\in D$，$\{v_n(x)\}$单调，且$v_n(x)\rightrightarrows0\ (n\rightarrow\infty)$；
+
+则$\sum u_n(x)v_n(x)$在$D$上一致收敛。
+
+**<font color="red" size=5>Abel判别法</font>**：若$\{u_n(x)\}$、$\{v_n(x)\}$满足：
+
+(1) $\sum u_n(x)$在$D$上一致收敛；
+
+(2) $\forall\ x\in D$，$\{v_n(x)\}$单调，且$\{v_n(x)\}$一致有界；
+
+则$\sum u_n(x)v_n(x)$在$D$上一致收敛。
+
+## 一致收敛函数项级数的性质
+**<font color="red" size=5>求极限顺序无关定理</font>**：若$\{f_n\}$满足：
+
+(1) $\forall\ n\in N_+$，$\lim_\limits{x\rightarrow x_0}f_n(x)$存在；
+
+(2) 在$\mathop{U}^\limits{0}(x_0)$上一致收敛于$f(x)$；
+
+则$\lim_\limits{x\rightarrow x_0}f(x)=\lim_\limits{n\rightarrow\infty}\lim_\limits{x\rightarrow x_0}f_n(x)$，即$$\lim_\limits{x\rightarrow x_0}\lim_\limits{n\rightarrow\infty}f_n(x)=\lim_\limits{n\rightarrow\infty}\lim_\limits{x\rightarrow x_0}f_n(x)$$。
+
+**<font color="#f47e76" size=4>推论</font>**：若$\{f_n\}$满足：
+
+(1) $\forall\ n\in N_+$，$\lim_\limits{x\rightarrow a^+}f_n(x)$存在；
+
+(2) 在$(a,b)$上一致收敛于$f(x)$；
+
+则$$\lim_\limits{x\rightarrow a^+}\lim_\limits{n\rightarrow\infty}f_n(x)=\lim_\limits{n\rightarrow\infty}\lim_\limits{x\rightarrow a^+}f_n(x)$$。
+
+**<font color="red" size=5>一致收敛函数列的连续性</font>**：若$\{f_n\}$满足：
+
+(1) $\forall\ n\in N_+$，$f_n(x)$在$I$上连续；
+
+(2) 在$I$上一致收敛于$f(x)$；
+
+则$f(x)$在$I$上连续，且$$f(x_0)=\lim_\limits{n\rightarrow\infty}f_n(x_0)$$。
+
+**<font color="#f47e76" size=4>推论</font>**：若$\{f_n\}$满足：
+
+(1) 在$I$上内闭一致收敛于$f(x)$;
+
+则$f$在$I$上连续。
+
+**<font color="red" size=5>一致收敛函数列的可积性</font>**：若$\{f_n\}$满足：
+
+(1) $\forall\ n\in N_+$，$f_n(x)$在$[a,b]$上连续；
+
+(2) 在$[a,b]$上一致收敛于$f(x)$；
+
+则$f(x)$在$[a,b]$上可积，且$$\int_a^bf(x)dx=\lim_\limits{n\rightarrow\infty}\int_a^bf_n(x)dx$$。
+
+**<font color="red" size=5>一致收敛函数列的可微性</font>**：若$\{f_n\}$满足：
+
+(1) $\forall\ n\in N_+$，$f_n'(x)$在$[a,b]$上连续；
+
+(2) $f_n'(x)$在$[a,b]$上一致收敛；
+
+(3) $\exists\ x_0\in[a,b]$，使$f_n(x_0)$收敛；
+
+则$f(x)$在$[a,b]$上可微，且$$\frac{d}{dx}f(x)=\lim_\limits{n\rightarrow\infty}\frac{d}{dx}f_n(x)$$。
+
+<font color="blue">注：由一致收敛函数列的可微性中的三个条件可以推出$f_n(x)$一致收敛，即$f_n(x)\rightrightarrows f(x)\ (n\rightarrow\infty),x\in[a,b]$。</font>
+
+**<font color="#f47e76" size=4>推论</font>**：若$\{f_n\}$满足：
+
+(1) $\exists\ x_0\in I$，使$f_n(x_0)$收敛;
+
+(2) $f_n'(x)$在$I$上内闭一致收敛；
+
+则$$\frac{d}{dx}f(x)=\lim_\limits{n\rightarrow\infty}\frac{d}{dx}f_n(x)$$。
+
+**<font color="red" size=5>一致收敛函数项级数的连续性</font>**：若$\sum u_n(x)$满足：
+
+(1) $\forall\ n\in N_+$，$u_n(x)$在$[a,b]$上连续；
+
+(2) 在$[a,b]$上一致收敛；
+
+则$$\lim_\limits{x\rightarrow x_0}\sum u_n(x)=\sum\lim_\limits{x\rightarrow x_0}u_n(x)$$。
+
+**<font color="red" size=5>一致收敛函数项级数的可积性（逐项求积）</font>**：若$\sum u_n(x)$满足：
+
+(1) $\forall\ n\in N_+$，$u_n(x)$在$[a,b]$上连续；
+
+(2) 在$[a,b]$上一致收敛；
+
+则$$\int_a^b\sum u_n(x)dx=\sum\int_a^bu_n(x)dx$$。
+
+**<font color="red" size=5>一致收敛函数项级数的可微性（逐项求导）</font>**：若$\sum u_n(x)$满足：
+
+(1) $\forall\ n\in N_+$，$u_n'(x)$在$[a,b]$上连续；
+
+(2) $\sum u_n'(x)$在$[a,b]$上一致收敛；
+
+(3) $\exists\ x_0\in[a,b]$，使$\sum u_n(x)$收敛；
+
+则$$\frac{d}{dx}\sum u_n(x)=\sum \frac{d}{dx}u_n(x)$$。
+
+# 幂级数
+## 幂级数基本性质
+**<font color="red" size=5>Abel定理</font>**：若$\sum a_nx^n$满足：
+
+(1) 在$x'$处收敛；
+
+则在$\big{(}-|x'|,|x'|\big{)}$处绝对收敛；
+
+(1) 在$x'$处发散；
+
+则在$\big{(}-\infty,-|x'|\big{)}\cup\big{(}|x'|,+\infty\big{)}$上发散。
+
+**<font color="red" size=5>幂级数收敛半径判定定理</font>**：若$\sum a_nx^n$满足：
+
+(1) $\lim_\limits{n\rightarrow\infty}\sqrt[n]{|a_n|}=l$，其中$l$可为$+\infty$；
+
+则收敛半径为$R=\frac{1}{l}$，其中当$l=0$时，$R=+\infty$；当$l=+\infty$时，$R=0$。
+
+**<font color="#f47e76" size=4>推论</font>**：若$\sum a_nx^n$满足：
+
+(1) $\lim_\limits{n\rightarrow\infty}\Big{|}\frac{a_{n+1}}{a_n}\Big{|}=l$；
+
+则$\lim_\limits{n\rightarrow\infty}\sqrt[n]{|a_n|}=l$。
+
+## 幂级数一致收敛性
+**<font color="red" size=5>幂级数一致收敛半径判定定理</font>**：若$\sum a_nx^n$满足：
+
+(1) 收敛半径为$R$；
+
+则在$x\in(-R,R)$上内闭一致收敛；
+
+(1) 在$x=R\ \ (x=-R)$上收敛；
+
+则在$x\in[0,R]\ \ \big{(}x\in[-R,0]\big{)}$上一致收敛。
+
+**<font color="red" size=5>幂级数和函数连续性</font>**：若$\sum a_nx^n$满足：
+
+(1) 收敛半径为$R$；
+
+则其和函数$f$在$(-R,R)$上连续；
+
+(1) 在收敛区间端点上收敛；
+
+则其和函数$f$连同在其端点上连续。
+
+**<font color="red" size=5>幂级数和函数可微性和可积性</font>**：若$\sum a_nx^n$满足：
+
+(1) 收敛半径为$R$；
+
+则其和函数$f$在$x\in(-R,R)$上可导，且$$f'(x)=\sum_{n=1}^{\infty}na_nx^{n-1}$$；则$f$在$[0,x]$上可积，且$$\int_0^xf(t)\ dt=\sum_{n=0}^\infty\frac{a_n}{n+1}x^{n+1}$$。
+
+# Fourior级数
+三角级数：$$\frac{a_0}{2}+\sum_{n=1}^\infty(a_n\cos nx+b_n\sin nx)$$
+
+**<font color="red" size=5>三角函数收敛定理</font>**：若三角级数满足：
+
+(1) $\frac{|a_0|}{2}+\sum^{\infty}_{n=1}(|a_n|+|b_n|)$收敛；
+
+则该三角级数在$R$上绝对收敛且一致收敛。
+
+**<font color="red" size=5>三角级数的系数定理</font>**：若三角级数满足：
+
+(1) 在$R$上一致收敛于$f(x)$；
+
+则$$a_0=\frac{1}{\pi}\int_{-\pi}^\pi f(x)\ dx\\a_n=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos nx\ dx\\b_n=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin nx\ dx$$。
+
+**<font color="red" size=5>函数的Fourior级数收敛定理</font>**：$f$满足：
+
+(1) 以$2\pi$为周期，且在$[-\pi,\pi]$上分段光滑（定义域为$R$）；
+
+则$\forall\ x_0\in[-\pi,\pi]$，有$$\frac{a_0}{2}+\sum_{n=1}^\infty(a_n\cos nx_0+b_n\sin nx_0)=\frac{f(x_0^-)+f(x_0^+)}{2}$$。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
