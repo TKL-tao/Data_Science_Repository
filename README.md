@@ -2,7 +2,7 @@
 This repository documents my learning journey in the field of Data Science.
 
 
-# Visions of this repository:
+# Visions:
 
 - **Good notes are upgrading along with my advancement.**
 
