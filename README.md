@@ -30,6 +30,7 @@ RNN: https://tkl-tao.github.io/Data_Science_Repository/Deep_Learning/RNN.html
 MLP: https://tkl-tao.github.io/Data_Science_Repository/Deep_Learning/MLP.html
 
 ## Machine Learning
+Machine Learning: https://tkl-tao.github.io/Data_Science_Repository/Machine_Learning/MachineLearning.html
 
 ## Mathematics
 Definition: https://tkl-tao.github.io/Data_Science_Repository/Mathematics/Definition.html
