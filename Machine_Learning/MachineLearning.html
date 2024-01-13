@@ -5,11 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="generator" content="pandoc" />
 
-        <meta name="author" content="Tao ZOU" />
+        <meta name="author" content="Tao Zou" />
     
-        <meta name="date" content="2024-01-13" />
+        <meta name="date" content="2024-01-06" />
     
-    <title>Basic Spark</title>
+    <title>Machine Learning</title>
 
         <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1817,33 +1817,36 @@ Prism.languages.r={comment:/#.*/,string:{pattern:/(['"])(?:\\.|(?!\1)[^\\\r\n])*
         <div class="Sidebar">
           <div class="SidebarItems" id="toc">
             <ul>
-            <li><a href="#set-up-spark">Set Up Spark</a>
+            <li><a href="#decision-tree">Decision Tree</a>
             <ul>
-            <li><a href="#connect-to-spark">Connect to Spark</a></li>
-            <li><a href="#show-basic-information">Show basic
-            information</a></li>
+            <li><a href="#节点的划分依据">节点的划分依据</a></li>
+            <li><a href="#预剪枝和后剪枝">预剪枝和后剪枝</a></li>
+            <li><a href="#python-code">Python code</a></li>
+            <li><a href="#python-code-using-pipeline">Python code using
+            Pipeline</a></li>
             </ul></li>
-            <li><a href="#load-and-process-data">Load and Process
-            Data</a>
+            <li><a href="#random-forest">Random Forest</a>
             <ul>
-            <li><a href="#load-.csv-data">Load .csv data</a></li>
-            <li><a href="#create-data">Create data</a></li>
-            <li><a href="#clean-data">Clean data</a></li>
-            <li><a href="#mutate-data">Mutate data</a></li>
-            <li><a href="#basic-data-manipulations">Basic data
-            manipulations</a></li>
+            <li><a href="#bootstrap-sampling">Bootstrap
+            Sampling</a></li>
+            <li><a href="#predictors-selection">Predictors
+            Selection</a></li>
+            <li><a href="#optimal-result">Optimal result</a></li>
+            <li><a href="#shortcomings-of-rf">Shortcomings of
+            RF</a></li>
             </ul></li>
-            <li><a href="#mllib">MLlib</a>
+            <li><a href="#adaboostadaptive-boosting">AdaBoost(Adaptive
+            Boosting)</a>
             <ul>
-            <li><a href="#decision-tree">Decision tree</a></li>
-            <li><a href="#logistic-regression">Logistic
-            regression</a></li>
-            <li><a href="#nlp">NLP</a></li>
-            <li><a href="#evaluation-metrics">Evaluation
-            metrics</a></li>
+            <li><a href="#workflow">Workflow</a></li>
+            <li><a href="#shortcomings">Shortcomings</a></li>
             </ul></li>
-            <li><a href="#docker-spark-connection">Docker spark
-            connection</a></li>
+            <li><a href="#naive-bayes">Naive Bayes</a>
+            <ul>
+            <li><a href="#formula-and-hypothese">Formula and
+            hypothese</a></li>
+            <li><a href="#参数估计">参数估计</a></li>
+            </ul></li>
             </ul>
           </div>
           <div data-position="sidebar:post-end" class="InjectedComponents"><div class="dark-theme-toggler"><div class="toggle "><div class="toggle-track"><div class="toggle-track-check"><img src="data:image/png;base64,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" role="presentation" style="pointer-events: none;" width="16" height="16"></div> <div class="toggle-track-x"><img src="data:image/png;base64,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" role="presentation" style="pointer-events: none;" width="16" height="16"></div></div> <div class="toggle-thumb"></div></div> <input type="checkbox" aria-label="Switch between Dark and Default theme" class="toggler-screen-reader-only"></div></div>
@@ -1853,12 +1856,12 @@ Prism.languages.r={comment:/#.*/,string:{pattern:/(['"])(?:\\.|(?!\1)[^\\\r\n])*
    
    
         
-      <h1 class="title">Basic Spark</h1>
+      <h1 class="title">Machine Learning</h1>
       
       <p class="authors">
-           <span class="glyphicon glyphicon-user"></span> Tao ZOU
+           <span class="glyphicon glyphicon-user"></span> Tao Zou
       </p>
-         <p class="date"><span class="glyphicon glyphicon-calendar"></span> 2024-01-13</p>
+         <p class="date"><span class="glyphicon glyphicon-calendar"></span> 2024-01-06</p>
            
 
    
@@ -1910,278 +1913,227 @@ document.addEventListener('DOMContentLoaded', (event) => {
   });
 });
 </script>
-<div id="set-up-spark" class="section level1">
-<h1>Set Up Spark</h1>
-<div id="connect-to-spark" class="section level2">
-<h2>Connect to Spark</h2>
-<pre class="python"><code>from pyspark.sql import SparkSession
-from pyspark.context import SparkContext
-import pandas as pd
-
-# Start a spark session.
-sc = SparkContext(appName=&#39;myfirstSpark&#39;, master=&#39;local[*]&#39;)  # Or the master can be for example &quot;spark://172.17.0.2:7077&quot;.
-spark = SparkSession(sc)
-
-# This code shows the cores being used.
-print(spark.sparkContext.defaultParallelism)
-#print(sc.defaultParallelism)</code></pre>
-<p><em>master</em> can be local or spark URL like
-spark://13.59.151.161:7077</p>
-<p>When I use docker spark cluster, the <em>master</em> should be set to
-<code>spark://172.17.0.2:7077</code>.</p>
+<div id="decision-tree" class="section level1">
+<h1>Decision Tree</h1>
+<div id="节点的划分依据" class="section level2">
+<h2>节点的划分依据</h2>
+<p>信息熵：<span class="math inline">\(H(Y)=-\sum_{y\in
+Y}P(Y=y)\log_2P(Y=y)\)</span></p>
+<p>条件信息熵：<span class="math inline">\(H(Y|X_1)=\sum_{x\in
+X_1}\frac{|X_1=x|}{|X|}H(Y|X_1=x)\)</span></p>
+<p><span class="math inline">\(X_1\)</span>变量的信息增益：<span class="math inline">\(H(Y)-H(Y|X_1)\)</span></p>
+<p><span class="math inline">\(X_1\)</span>变量的信息增益比率：<span class="math inline">\(\frac{H(Y)-H(Y|X_1)}{H(X_1)}\)</span></p>
+<p>变量<span class="math inline">\(Y\)</span>的分布越不均匀<span class="math inline">\(H(Y)\)</span>越大。划分子节点时依据使信息增益比率最大的自变量作为划分依据。</p>
+<p>Gini指数：<span class="math inline">\(Gini(Y)=1-\sum_{y\in
+Y}[P(Y=y)]^2\)</span></p>
+<p>Gini指数的操作方式和信息熵一致。</p>
+<p>Discussions:</p>
+<ol style="list-style-type: decimal">
+<li>If <span class="math inline">\(X_1\)</span> has many different</li>
+</ol>
 </div>
-<div id="show-basic-information" class="section level2">
-<h2>Show basic information</h2>
-<pre class="python"><code>spark.catalog.listTables()  # Retrieve a list of tables available in current Spark Session.</code></pre>
+<div id="预剪枝和后剪枝" class="section level2">
+<h2>预剪枝和后剪枝</h2>
+<p>预剪枝和后剪枝是降低过拟合风险的手段。</p>
+<div id="预剪枝" class="section level3">
+<h3>预剪枝</h3>
+<p>预剪枝与树的生成过程同时进行，每划分一次节点，就要在测试集中计算正确率。若正确率提高则允许划分该节点；正确率降低则禁止划分该节点。</p>
+<p>预剪枝具有以下特点：</p>
+<ol style="list-style-type: decimal">
+<li><p>降低了决策树的训练时间开销。</p></li>
+<li><p>其“贪心”的本质会带来欠拟合的风险。</p></li>
+</ol>
+</div>
+<div id="后剪枝" class="section level3">
+<h3>后剪枝</h3>
+<p>后剪枝在树生成完毕之后进行。在一棵完整的决策树中自底向上、从左至右依次考察如果不进行该节点的划分能否在测试集中提高正确率，若能则保留节点，若不能则禁止节点的划分。</p>
+<p>后剪枝具有以下特点：</p>
+<ol style="list-style-type: decimal">
+<li><p>决策树训练时间开销较大。</p></li>
+<li><p>欠拟合的风险一般情况下很小。</p></li>
+</ol>
 </div>
 </div>
-<div id="load-and-process-data" class="section level1">
-<h1>Load and Process Data</h1>
-<div id="load-.csv-data" class="section level2">
-<h2>Load .csv data</h2>
-<pre class="python"><code>file = &#39;___.csv&#39;
-mydata = spark.read.csv(path=file, header=True, inferSchema=False, nullValue=None, schema=None)
+<div id="python-code" class="section level2">
+<h2>Python code</h2>
+<p>The internal design of
+<code>sklearn.tree.DecisionTreeClassifier</code> is slightly different
+from the decision tree that I have learned. For example, in
+<code>sklearn</code>, the node splitting strategy for decision tree is
+binary, and the node of the same feature may reappear in the subsequent
+splitting process.</p>
+<pre class="python"><code>import pandas as pd
+import numpy as np
+from sklearn.tree import DecisionTreeClassifier
 
-mydata.printSchema()  # show the columns&#39; names and their datatypes.
-mydata.show()</code></pre>
+train_data = pd.DataFrame({
+              &#39;attribute1&#39;: [1, 4, 2, 1, 5, 1, 2, 2, 10, 4, 1, 1.0, 2],
+              &#39;attribute2&#39;: [5, 1, 9, 2, 1, 10, 2, 2, 1, 5, 1, 2, -2.0],
+              &#39;attribute3&#39;: [&#39;male&#39;, &#39;male&#39;, &#39;female&#39;, &#39;female&#39;, &#39;male&#39;, &#39;male&#39;, &#39;male&#39;, &#39;female&#39;, &#39;male&#39;, &#39;male&#39;, &#39;male&#39;, &#39;female&#39;, &#39;female&#39;],
+              &#39;label&#39;: [&#39;class1&#39;, &#39;class2&#39;, &#39;class2&#39;, &#39;class1&#39;, &#39;class2&#39;, &#39;class1&#39;, &#39;class1&#39;, &#39;class2&#39;, &#39;class1&#39;, &#39;class1&#39;, &#39;class2&#39;, &#39;class2&#39;, &#39;class2&#39;]
+              })</code></pre>
+<p>It’s needed to transfer non-ratio or non-interval data into
+<Categorical> and then transfer them into the categorical codes, or the
+DecisionTreeClassifier() can’t work correctly.</p>
+<pre class="python"><code># .cat of &lt;Series&gt; allows to access the categorical methods and properties.
+# .cat accessor&#39;s property .code returns the integer encoding of a &lt;Series&gt;
+def data_preparation(train_data):
+  train_data[&#39;attribute3&#39;] = pd.Categorical(train_data[&#39;attribute3&#39;])
+  train_data[&#39;attribute3&#39;] = train_data[&#39;attribute3&#39;].cat.codes
+
+  return train_data
+
+train_data = data_preparation(train_data)</code></pre>
+<pre class="python"><code>features = [&#39;attribute1&#39;, &#39;attribute2&#39;, &#39;attribute3&#39;]
+label = [&#39;label&#39;]
+model = DecisionTreeClassifier(criterion=&#39;gini&#39;, random_state=0, max_depth=3, min_samples_split=2)
+model = model.fit(train_data.loc[:, features], train_data.loc[:, label])
+
+pred_probas = model.predict_proba(train_data.loc[:, features])
+pred_label = model.predict(train_data.loc[:, features])
+
+print(&#39;predicted probabilities: &#39;,  pred_probas, &#39;predicted label: &#39;, pred_label, sep=&#39;\n&#39;)</code></pre>
+<pre><code>## predicted probabilities: 
+## [[1.  0. ]
+##  [0.  1. ]
+##  [0.  1. ]
+##  [0.5 0.5]
+##  [0.  1. ]
+##  [1.  0. ]
+##  [1.  0. ]
+##  [0.  1. ]
+##  [1.  0. ]
+##  [1.  0. ]
+##  [0.  1. ]
+##  [0.5 0.5]
+##  [0.  1. ]]
+## predicted label: 
+## [&#39;class1&#39; &#39;class2&#39; &#39;class2&#39; &#39;class1&#39; &#39;class2&#39; &#39;class1&#39; &#39;class1&#39; &#39;class2&#39;
+##  &#39;class1&#39; &#39;class1&#39; &#39;class2&#39; &#39;class1&#39; &#39;class2&#39;]</code></pre>
+</div>
+<div id="python-code-using-pipeline" class="section level2">
+<h2>Python code using Pipeline</h2>
+<pre class="python"><code>from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import FunctionTransformer  # used for custom-designed data pre-processing function
+
+mydata = pd.read_csv(&#39;data/Titanic_Train.csv&#39;, header=0, index_col=&#39;PassengerId&#39;)
+mytestdata = pd.read_csv(&#39;data/Titanic_Test.csv&#39;, header=0)  # Test dataset doesn&#39;t have target variable &#39;Survived&#39;.
+
+def datacleaning_function(mydata):
+    mydata = datacleaning(mydata)
+    mydata = mydata.loc[:, [&#39;Sex&#39;, &#39;Embarked&#39;, &#39;Fare&#39;, &#39;Age&#39;, &#39;Pclass&#39;, &#39;Parch&#39;, &#39;SibSp&#39;]]
+    mydata[&#39;Embarked&#39;] = pd.Categorical(mydata[&#39;Embarked&#39;])
+    mydata[&#39;Embarked&#39;] = mydata[&#39;Embarked&#39;].cat.codes
+
+    return mydata
+
+pipeline = Pipeline([
+    (&#39;custom_transform&#39;, FunctionTransformer(datacleaning_function)),
+    (&#39;classifier&#39;, DecisionTreeClassifier())
+    ], verbose=True)
+
+mydata = mydata.dropna()
+label = mydata[&#39;Survived&#39;]
+features = mydata.loc[:, [&#39;Sex&#39;, &#39;Embarked&#39;, &#39;Fare&#39;, &#39;Age&#39;, &#39;Pclass&#39;, &#39;Parch&#39;, &#39;SibSp&#39;]]
+
+pipeline.fit(features, label)  # The custom_transform only applies to features. label remains the same.
+
+pipeline.predict(mytestdata.loc[list(range(10)), [&#39;Sex&#39;, &#39;Embarked&#39;, &#39;Fare&#39;, &#39;Age&#39;, &#39;Pclass&#39;, &#39;Parch&#39;, &#39;SibSp&#39;]])</code></pre>
+</div>
+</div>
+<div id="random-forest" class="section level1">
+<h1>Random Forest</h1>
+<p>Random forest generates a number of <strong>simple</strong> trees,
+each of them can mitigate overfitting. Then random forest use
+<strong>mean</strong> method to enhance model accuracy.</p>
+<div id="bootstrap-sampling" class="section level2">
+<h2>Bootstrap Sampling</h2>
+<p>Suppose a dataset containing <span class="math inline">\(n\)</span>
+samples. Each sample is randomly selected with replacement at a
+probability of <span class="math inline">\(\frac{1}{n}\)</span>; and
+sampling is conducted <span class="math inline">\(n\)</span> times.</p>
+<p>When <span class="math inline">\(n\)</span> is sufficiently large,
+the proportion of samples not selected is:<span class="math display">\[\lim_{n\rightarrow\infty}\big{(}1-\frac{1}{n}\big{)}^n=\frac{1}{e}\approx0.368\]</span></p>
+<p><code>&lt;DataFrame&gt;.sample(frac, replace=False)</code>:
+<em>frac</em> represents the proportion of samples extracted from
+&lt;DataFrame&gt;.</p>
+<p><em>n_estimator</em> represents the number of decision trees to be
+created.</p>
+</div>
+<div id="predictors-selection" class="section level2">
+<h2>Predictors Selection</h2>
+<p><em>max_features</em> represents the number of features to be fed
+into each tree. The features are sampled from the original predictors in
+dataset.</p>
+</div>
+<div id="optimal-result" class="section level2">
+<h2>Optimal result</h2>
+<p>Calculate the classification results from each tree and take the
+average of the results, thus obtain the final classification result.</p>
+<pre class="python"><code>from sklearn.ensemble import RandomForestClassifier
+
+mymodel = RandomForestClassifier(n_estimators, max_features, max_depth)
+mymodel.fit(x_train, y_train)</code></pre>
+</div>
+<div id="shortcomings-of-rf" class="section level2">
+<h2>Shortcomings of RF</h2>
 <ul>
-<li><p><em>inferSchema</em>: <em>inferSchema</em>=True means to infer
-data type in different columns or the data type will be imported as
-‘string’.</p></li>
-<li><p><em>schema</em>: <em>schema</em> can be specified as</p></li>
+<li><p>If the number of tress is too large, there will be risk in
+correlation among trees, thus increase the probability of
+overfitting.</p></li>
+<li><p>If some predictors are independent of the response while others
+are dependent, then effect of RF will be low.</p></li>
 </ul>
-<pre><code>import pyspark.sql.types import StructType
-schema=StructType([
-                  StructField(&#39;id&#39;, StringType(), nullable=True),
-                  StructField(&#39;age&#39;, IntegerType(), nullable=True),
-                  StructField(&#39;grade&#39;, DoubleType(), nullable=True)])
-</code></pre>
 </div>
-<div id="create-data" class="section level2">
-<h2>Create data</h2>
-<pre class="python"><code># The code below create a Spark.DataFrame which is stored locally.
-mydata = spark.createDataFrame(pd.DataFrame(np.random.random(10)))
-# The code below registers mydata as a temporary table in Spark Session
-mydata.createOrReplaceTempView(name=&#39;mydataframe&#39;)</code></pre>
 </div>
-<div id="clean-data" class="section level2">
-<h2>Clean data</h2>
-<pre class="python"><code># drop &#39;column1&#39;
-mydata = mydata.drop(&#39;column1&#39;)
-# number of missing value with &#39;column2&#39;
-mydata.filter(&#39;column1 IS NULL&#39;).count()
-# remove records with missing &#39;column2&#39; value
-mydata = mydata.filter(&#39;column2 IS NOT NULL&#39;)
-# remove any row with one or more NA
-mydata = mydata.dropna()</code></pre>
-</div>
-<div id="mutate-data" class="section level2">
-<h2>Mutate data</h2>
-<pre class="python"><code>from pyspark.ml.feature import StringIndexer, VectorAssembler
-
-# create new columns from old columns
-mydata = mydata.withColumn(&#39;new_column1&#39;, round(mydata.column2 / 2, 2))
-mydata = mydata.withColumn(&#39;new_column2&#39;, (mydata.column3&gt;=10).cast(&#39;integer&#39;))
-
-# Index country of origin:
-# USA -&gt; 0    non-USA -&gt; 1
-mydata = StringIndexer(inputCol=&#39;origin&#39;, outputCol=&#39;label&#39;).fit(mydata).transform(mydata)
-
-# Assemble columns
-assembler = VectorAssembler(inputCols=[&#39;column1&#39;, &#39;column2&#39;], outputCol=&#39;features&#39;)
-data_assembled = assembler.transform(mydata)</code></pre>
-</div>
-<div id="basic-data-manipulations" class="section level2 tabset">
-<h2 class="tabset">Basic data manipulations</h2>
-<div id="groupby" class="section level3">
-<h3>.groupBy()</h3>
-<p>Suppose I have a <code>&lt;pyspark.sql.dataframe.DataFrame&gt;</code>
-named mydata, whose columns and data types are shown below.</p>
-<p>root</p>
-<p>|– userId: integer (nullable = true)</p>
-<p>|– movieId: integer (nullable = true)</p>
-<p>|– rating: double (nullable = true)</p>
-<p>|– timestamp: integer (nullable = true)</p>
-<pre class="python"><code>import pyspark.sql.functions as F
-
-mydata.groupBy(&#39;movieId&#39;).agg(F.round(F.avg(&#39;rating&#39;), 2).alias(&#39;avg_rating&#39;), F.min(&#39;timestamp&#39;)).show(n=10, truncate=False)</code></pre>
+<div id="adaboostadaptive-boosting" class="section level1">
+<h1>AdaBoost(Adaptive Boosting)</h1>
+<div id="workflow" class="section level2">
+<h2>Workflow</h2>
 <ul>
-<li><p>.agg(): Aggregation function for a group. Use
-<code>.agg(avg(&#39;rating&#39;), max(&#39;rating&#39;), min(&#39;timestamp&#39;), count())</code>
-to manipulate the columns according to a defined group.</p></li>
-<li><p>.alias(): The method used to rename a dataframe or a column. In
-the code above, .alias() renames ‘round(avg(’rating’), 2)’ as
-‘avg_rating’. Other usages:
-<code>mydata.select(col(&#39;rating&#39;).alias(&#39;myrating&#39;)).show(5)</code>,
-<code>mydata = mydata.alias(&quot;newname_dataframe&quot;)</code></p></li>
+<li><p>Initialize some simple learners and their number.</p></li>
+<li><p>In training progress, adjust each learner’s weight to increase
+accuracy.</p></li>
 </ul>
-</div>
-<div id="regexp" class="section level3">
-<h3>regexp</h3>
-<p>Replace the matched result.</p>
-<pre class="python"><code># This code is an expression which should be used in `.withColumn()`.
-F.regexp_replace(&#39;marry 2014&#39;, &#39;\d+&#39;, &#39;&#39;)</code></pre>
-<p>Extract target number in a text. The matched result is a
-&lt;string&gt;, I must cast it into integer by
-<code>.cast(IntegerType())</code>.</p>
-<pre class="python"><code>from pyspark.sql.types import IntegerType
+<pre class="python"><code>from sklearn.ensemble import AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
 
-# This code is an expression which should be used in `.withColumn()`.
-F.regexp_extract(&#39;movie1(1994)(1995)&#39;, &#39;\((\d{4})\)\((\d{4})\)&#39;, idx=2).cast(IntegerType())</code></pre>
-<ul>
-<li><em>idx</em>: <em>idx</em> = 2 means return the matched result in
-the second parentheses.</li>
-</ul>
-<p><code>F.split()</code> split a &lt;string&gt; into a &lt;array&gt;
-including separated part. Remember to use a backslash before | or
-<code>F.split()</code> will split every character.
-<code>F.explode()</code> can extend a line to lines according to the
-&lt;array&gt;.</p>
-<pre class="python"><code># This code is an expression which should be used in `.withColumn()`.
-F.split(&#39;Lucas|Bella|Jack&#39;, &#39;\|&#39;)
-F.explode(F.split(&#39;Lucas|Bella|Jack&#39;, &#39;\|&#39;))</code></pre>
+mymodel = AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=3), n_estimators=200, learning_rate=0.05)
+mymodel.fit(x_train, y_train)
+y_pred = mymodel.predict(x_train)</code></pre>
 </div>
-<div id="timestamp" class="section level3">
-<h3>timestamp</h3>
-<p>Transform a timestamp into a specified format.</p>
-<pre class="python"><code>F.date_format(F.from_unixtime(1147880044), &quot;yyyy-MM-dd&quot;)</code></pre>
+<div id="shortcomings" class="section level2">
+<h2>Shortcomings</h2>
+<p>AdaBoost is sensitive to outliers and noise because it continuously
+adjusts the weights to focus on difficult-to-classify samples.</p>
 </div>
 </div>
+<div id="naive-bayes" class="section level1">
+<h1>Naive Bayes</h1>
+<div id="formula-and-hypothese" class="section level2">
+<h2>Formula and hypothese</h2>
+<p>If <span class="math inline">\(X_1\)</span> is a continuous
+attribute, <span class="math inline">\(X_2\)</span> is a discrete
+attribute, <span class="math inline">\(Y\)</span> is a discrete response
+variable.</p>
+<p><span class="math display">\[\begin{aligned}P(Y=y|X_1=x_1,X_2=x_2)&amp;=\frac{P(X_1=x_1,X_2=x_2|Y=y)P(Y=y)}{P(X_1=x_1,X_2=x_2)}\\&amp;=\lim_{h\rightarrow0^+}\frac{P(x_1\leq
+X_1\leq x_1+h,X_2=x_2|Y=y)P(Y=y)}{P(x_1\leq X_1\leq
+x_1+h,X_2=x_2)}\\&amp;=\frac{\lim_\limits{h\rightarrow0^+}\frac{1}{h}P(x_1\leq
+X_1\leq
+x_1+h,X_2=x_2|Y=y)P(Y=y)}{\lim_\limits{h\rightarrow0^+}\frac{1}{h}P(x_1\leq
+X_1\leq x_1+h,X_2=x_2)}\end{aligned}\]</span></p>
+<p>Naive Bayes hypothesis：</p>
+<p><span class="math display">\[\begin{aligned}\lim_\limits{h\rightarrow0^+}\frac{1}{h}P(x_1\leq
+X_1\leq
+x_1+h,X_2=x_2|Y=y)&amp;=\Big{(}\lim_\limits{h\rightarrow0^+}\frac{1}{h}P(x_1\leq
+X_1\leq x_1+h|Y=y)\Big{)}P(X_2=x_2|Y=y)\\&amp;=p_{X_1|Y=y}(x_1)\cdot
+P(X_2=x_2|Y=y)\end{aligned}\]</span></p>
 </div>
-<div id="mllib" class="section level1">
-<h1>MLlib</h1>
-<div id="decision-tree" class="section level2">
-<h2>Decision tree</h2>
-<p>Suppose I have a dataset named mydata, whose data structure is shown
-below:</p>
-<p><span class="math display">\[\begin{matrix}\color{red}{Column\
-Name}:&amp;Pclass&amp;Sex&amp;Embarked&amp;Survived\\\color{red}{Data\
-Type}:&amp;integer&amp;string&amp;stirng&amp;integer\\\color{red}{Values}:&amp;\{1,2,3\}&amp;\{female,male\}&amp;\{C,S\}&amp;\{0,1\}\end{matrix}\]</span></p>
-<p>Pclass, Sex, and Embarked are the predictors. Survived is the
-response variable. Then I need to create two columns, which are ‘label’
-and ‘features’.</p>
-<pre class="python"><code>from pyspark.ml.feature import StringIndexer, VectorAssembler
-
-# Prepare predictors: index categorical variables
-mydata = StringIndexer(inputCol=&#39;Sex&#39;, outputCol=&#39;Sex_indexed&#39;).fit(mydata).transform(mydata)
-mydata = StringIndexer(inputCol=&#39;Embarked&#39;, outputCol=&#39;Embarked_indexed&#39;).fit(mydata).transform(mydata)
-
-# Prepare predictors: assemble predictors into a vector
-assembler = VectorAssembler(inputCols=[&#39;Pclass&#39;, &#39;Sex_indexed&#39;, &#39;Embarked_indexed&#39;], outputCol=&#39;features&#39;)  # the outputCol must be &#39;features&#39; and it can&#39;t be something else like &#39;feature&#39;.
-mydata = assembler.transform(data)
-
-# Prepare response variable:
-mydata = mydata.withColumn(&#39;label&#39;, mydata.Survived)  # the new column&#39;s name must be &#39;label&#39; and it can&#39;t be something else.</code></pre>
-<pre class="python"><code>from pyspark.ml.classification import DecisionTreeClassifier
-
-mydata_train, mydata_test = mydata.randomSplit([0.8, 0.2], seed=0)
-print([mydata_train.count(), mydata_test.count()])
-
-classifier = DecisionTreeClassifier()
-model = classifier.fit(mydata_train)  # It seems that classifier.fit() can automatically identify the features(features) and labels(label) in mydata_train.
-
-prediction = model.transform(mydata_test)
-prediction = prediction.select(&#39;label&#39;, &#39;prediction&#39;, &#39;probability&#39;)
-# Below code shows the confusion matrix
-prediction.groupBy(&#39;label&#39;, &#39;prediction&#39;).count().show()
-
-# Calculate the elements of the confusion matrix
-TN = prediction.filter(&#39;prediction = 0 AND label = prediction&#39;).count()
-TP = prediction.filter(&#39;prediction = 1 AND label = prediction&#39;).count()
-FN = prediction.filter(&#39;prediction = 0 AND label != prediction&#39;).count()
-FP = prediction.filter(&#39;prediction = 1 AND label != prediction&#39;).count()
-
-# Accuracy measures the proportion of correct predictions
-accuracy = (TN + TP) / (TN + TP + FN + FP)
-print(accuracy)</code></pre>
-<p>The data structure of <code>prediction</code>:</p>
-<p><span class="math inline">\(\begin{matrix}\boldsymbol{label}&amp;\boldsymbol{prediction}&amp;\boldsymbol{probability}\\y_1&amp;\hat{y}_1&amp;[p_1,p_2,\cdots,p_d]^{(1)}\\y_2&amp;\hat{y}_2&amp;[p_1,p_2,\cdots,p_d]^{(2)}\\\vdots&amp;\vdots&amp;\vdots\\y_n&amp;\hat{y}_n&amp;[p_1,p_2,\cdots,p_d]^{(n)}\end{matrix}\)</span></p>
+<div id="参数估计" class="section level2">
+<h2>参数估计</h2>
+<p>可以通过假设<span class="math inline">\(Y\)</span>的分布，然后通过极大似然估计得到<span class="math inline">\(P(Y=y)\)</span>的估计值；也可以通过频率法直接得到<span class="math inline">\(P(Y=y)\)</span>的估计。</p>
+<p>当<span class="math inline">\(X\)</span>为离散随机变量时，也可以通过上述方法得到<span class="math inline">\(P(X=x|Y=y)\)</span>的估计值；当<span class="math inline">\(X\)</span>为连续随机变量时，通常假定其条件分布函数（条件正态分布）再同构极大似然法进行参数估计。</p>
 </div>
-<div id="logistic-regression" class="section level2">
-<h2>Logistic regression</h2>
-<p>Generally, the predictors in Logistic regression are all ratio-scaled
-or interval-scaled data type.</p>
-<pre class="python"><code>from pyspark.ml.classification import LogisticRegression
-
-classifier = LogisticRegression()
-model = classifier.fit(mydata_train)
-
-prediction = model.transform(flights_test)
-prediction.groupBy(&#39;label&#39;, &#39;prediction&#39;).count().show()</code></pre>
-</div>
-<div id="nlp" class="section level2">
-<h2>NLP</h2>
-<p>Text data pre-processing</p>
-<pre class="python"><code>from pyspark.sql.functions import regexp_replace
-from pyspark.ml.feature import Tokenizer
-
-reg = &#39;[_():;,.!?\\-]&#39;  # Match any of the punctuation marks included in []
-mydata = mydata.withColumn(&#39;text&#39;, regexp_replace(mydata.text, reg, &#39;&#39;))
-mydata = mydata.withColumn(&#39;text&#39;, regexp_replace(mydata.text, &#39;\d+&#39;, &#39;&#39;))
-mydata = mydata.withColumn(&#39;text&#39;, regexp_replace(mydata.text, &#39; +&#39;, &#39;&#39;))
-
-# Tokenizer can only tokenize English words
-mydata = Tokenizer(inputCol=&#39;text&#39;, outputCol=&#39;tokens&#39;).transform(mydata)</code></pre>
-<pre class="python"><code>from pyspark.ml.feature import StopWordsRemover
-from pyspark.ml.feature import HashingTF
-from pyspark.ml.feature import IDF
-
-stopwords = StopWordsRemover()
-#stopwords.getStopWords()  # Take a look at the list of stop words
-
-stopwords = stopwords.setInputCol(&#39;tokens&#39;).setOutputCol(&#39;words&#39;)
-mydata = stopwords.transform(mydata)
-
-hasher = HashingTF(inputCol=&#39;words&#39;, outputCol=&#39;hash&#39;, numFeatures=32)
-mydata = hasher.transform(mydata)
-
-mydata = IDF(inputCol=&#39;hash&#39;, outputCol=&#39;features&#39;).fit(mydata).transform(mydata)
-
-mydata.select(&#39;words&#39;, &#39;features&#39;).show(10, truncate=False)</code></pre>
-<p><em>numFeatures</em> is the length of features of TF vector. TF
-values are stored in a <em>numFeatures</em> length vector by hash
-function. If <em>numFeatures</em> is set to less than the number of
-different words, TF values of different words maybe stored in the same
-position, which is called Hash Collision.</p>
-</div>
-<div id="evaluation-metrics" class="section level2">
-<h2>Evaluation metrics</h2>
-<pre class="python"><code>from pyspark.ml.evaluation import MulticlassClassificationEvaluator
-from pyspark.ml.evaluation import BinaryClassificationEvaluator
-
-evaluator = MulticalssClassificationEvaluator()
-#evaluator = BinaryClassificationEvaluator()
-# evaluator.metricName can be &#39;weightRecall&#39;, &#39;accuracy&#39; and &#39;f1&#39;.
-evaluator.evaluate(prediction, {evaluator.metricName: &#39;weightedPrecision&#39;})</code></pre>
-</div>
-</div>
-<div id="docker-spark-connection" class="section level1">
-<h1>Docker spark connection</h1>
-<p>pull image: <code>docker pull apache/spark-py</code></p>
-<p>use ‘apache/spark-py’ to run a container, and execute a
-‘/opt/spark/bin/pyspark’ in the created container:
-<code>docker run -it apache/spark-py /opt/spark/bin/pyspark</code></p>
-<p>create a spark-master with 2 cores and 4GB memory:
-<code>docker run -it -u root -p 8080:8080 --name spark_master --cpus 2 -m 4g apache/spark-py /bin/bash</code>.
-Then on the ‘bash’ command line: <code>cd ..</code>
-<code>./bin/spark-class org.apache.spark.deploy.master.Master</code>.</p>
-<p>create a spark-workerwith 2 cores and 4GB memory:
-<code>docker run -it -u root --link spark_master:spark_master --name spark_worker1 --cpus 2 -m 4g apache/spark-py /bin/bash</code>.
-Then on the ‘bash’ command line: <code>cd ..</code>
-<code>./bin/spark-class org.apache.spark.deploy.worker.Worker spark://172.17.0.2:7077</code>.</p>
-<p>submit a .py file to master on the bash line:
-<code>/opt/spark/bin/spark-submit --master spark://172.17.0.2:7077 /my/spark python/path/mypython.py</code>;
-or on the Windows command line:
-<code>docker exec spark_master /opt/spark/bin/spark-submit /python/path/mypython.py</code></p>
-<p>How to enter a container’s bash command:</p>
-<pre><code>docker start my_docker_container_name
-docker exec -it my_docker_container_name bash</code></pre>
-<p>How to install a python library in a docker container:</p>
-<p>Windows command
-line<code>docker exec -it container&#39;s_name /bin/bash</code>, then
-<code>pip install numpy</code></p>
-<p>How to copy a file from local to a container:</p>
-<p><code>docker cp local_file_path/mydata.csv container&#39;s_name:/container/file/path/mydata.csv</code></p>
 </div>
 </div>
 
