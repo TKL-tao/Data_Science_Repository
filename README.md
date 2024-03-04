@@ -23,11 +23,13 @@ Basic Problems: https://tkl-tao.github.io/Data_Science_Repository/Deep_Learning/
 
 Basic Workflow: https://tkl-tao.github.io/Data_Science_Repository/Deep_Learning/Basic_Workflow.html
 
+MLP: https://tkl-tao.github.io/Data_Science_Repository/Deep_Learning/MLP.html
+
 CNN: https://tkl-tao.github.io/Data_Science_Repository/Deep_Learning/CNN.html
 
 RNN: https://tkl-tao.github.io/Data_Science_Repository/Deep_Learning/RNN.html
 
-MLP: https://tkl-tao.github.io/Data_Science_Repository/Deep_Learning/MLP.html
+Attention Mechanism: https://tkl-tao.github.io/Data_Science_Repository/Deep_Learning/AttentionMechanism.html
 
 ## Machine Learning
 Machine Learning: https://tkl-tao.github.io/Data_Science_Repository/Machine_Learning/MachineLearning.html
